@@ -14,43 +14,52 @@ import { EditarLivro } from "./pages/EditarLivro/EditarLivro";
 import { AdicionarEmprestimo } from "./pages/AdicionarEmprestimo/AdicionarEmprestimo";
 import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
+import { Splash } from "./components/Splash/Splash";
+
+
 
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [splash, setSplash] = useState(true);
+
 
   useEffect(() => {
-    // Monitorar/detectar o usuário conectado
-    // Fica sabendo quando loga/desloga
     onAuthStateChanged(auth, (user) => {
-      // user é nulo = deslogado
-      // user tem objeto = logado
       setUsuarioLogado(user);
-    });
 
-    // Esse efeito irá rodar apenas uma vez
-    // Quando o App for renderizado/inicializado
+      setTimeout(() => {
+        setSplash(false)
+      }, 5000);
+
+
+    });
   }, []);
 
+
   return (
-    <>
-      <AuthContext.Provider value={usuarioLogado}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Root />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/livros" element={<Livros />} />
-              <Route path="/livros/adicionar" element={<AdicionarLivro />} />
-              <Route path="/livros/editar/:id" element={<EditarLivro />} />
-              <Route path="/emprestimos" element={<Emprestimos />} />
-              <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
-              <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthContext.Provider>
-      <Toaster />
-    </>
+    <div>
+      {splash ? <Splash/> :
+        <>
+          <AuthContext.Provider value={usuarioLogado}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Root />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/livros" element={<Livros />} />
+                  <Route path="/livros/adicionar" element={<AdicionarLivro />} />
+                  <Route path="/livros/editar/:id" element={<EditarLivro />} />
+                  <Route path="/emprestimos" element={<Emprestimos />} />
+                  <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
+                  <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
+                </Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+              </Routes>
+            </BrowserRouter>
+          </AuthContext.Provider>
+          <Toaster />
+        </>
+      }
+    </div>
   );
 }
