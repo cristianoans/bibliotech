@@ -5,12 +5,12 @@ import { getStorage } from "firebase/storage";
 
 // Chaves de acesso ao firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCGV-hKd1DwX0wKcmlJV65SF1V2m1Bo9eY",
-  authDomain: "bibliotech-aulas-241dd.firebaseapp.com",
-  projectId: "bibliotech-aulas-241dd",
-  storageBucket: "bibliotech-aulas-241dd.appspot.com",
-  messagingSenderId: "455282911729",
-  appId: "1:455282911729:web:37e3cca50849ce62b73c50",
+  apiKey: "AIzaSyCg0VQ1mhI2zwJjiVe9ua73onCtkORMvKo",
+  authDomain: "bibliotech-cgo.firebaseapp.com",
+  projectId: "bibliotech-cgo",
+  storageBucket: "bibliotech-cgo.appspot.com",
+  messagingSenderId: "275945906759",
+  appId: "1:275945906759:web:b11e159dffbe5834860762"
 };
 
 // Inicializa o app com base nas configurações acima
