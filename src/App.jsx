@@ -16,6 +16,7 @@ import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
 import { Splash } from "./components/Splash/Splash";
 import { PoliticaPrivacidade } from "./pages/PoliticaPrivacidade/PoliticaPrivacidade";
+import { NotFound } from "./components/NotFound/NotFound";
 
 
 export function App() {
@@ -53,7 +54,9 @@ export function App() {
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
+             
             </BrowserRouter>
           </AuthContext.Provider>
           <Toaster />
