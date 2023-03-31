@@ -37,13 +37,13 @@ export function Login() {
   }
 
   const [tipoInput, setTipoInput] = useState("password");
-  const [tipoIcone, setTipoIcone] = useState("bi bi-eye-fill");
+  const [tipoIcone, setTipoIcone] = useState("bi bi-eye-slash-fill");
   function mudarTipo() {
     if (tipoInput === "password") {
-      setTipoIcone("bi bi-eye-slash-fill")
+      setTipoIcone("bi bi-eye-fill")
       setTipoInput("text")
     } else {
-      setTipoIcone("bi bi-eye-fill")
+      setTipoIcone("bi bi-eye-slash-fill")
       setTipoInput("password")
     }
   }
