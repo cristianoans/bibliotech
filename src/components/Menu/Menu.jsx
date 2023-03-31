@@ -1,10 +1,10 @@
 
-import "./Menu";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import "./Menu.css";
+import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext"; //nome de usuario perto logout
 
 

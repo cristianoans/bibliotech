@@ -23,7 +23,7 @@ export async function loginGoogle() {
   // Configurar como o login do google vai funcionar
   const provider = new GoogleAuthProvider();
   const resultado = await signInWithPopup(auth, provider);
-
+  
   return resultado.user;
 }
 

@@ -7,7 +7,6 @@ import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
 import { loginGoogle, loginEmailSenha } from "../../firebase/auth";
-import { click } from "@testing-library/user-event/dist/click";
 
 export function Login() {
   const {
