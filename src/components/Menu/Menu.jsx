@@ -53,10 +53,11 @@ export function Menu() {
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
               </Nav.Link>
-			  <Nav.Link as={Link} to="/Politica-Privacidade">
+            <Nav.Link as={Link} to="politica-privacidade">
               Política de Privacidade
             </Nav.Link>
               <Nav.Link
+
                 onClick={() => {
                   onLogout();
                   setShow(false);
@@ -81,6 +82,9 @@ export function Menu() {
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
               </Nav.Link>
+              <Nav.Link as={Link} to="politica-privacidade">
+              Política de Privacidade
+            </Nav.Link>
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap
                 // Lembrar de estilizar
