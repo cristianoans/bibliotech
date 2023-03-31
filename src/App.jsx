@@ -30,8 +30,6 @@ export function App() {
       setTimeout(() => {
         setSplash(false)
       }, 1000);
-
-
     });
   }, []);
 
