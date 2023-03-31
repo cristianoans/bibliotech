@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Button, Container, Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
 import { loginGoogle, loginEmailSenha } from "../../firebase/auth";
+import { click } from "@testing-library/user-event/dist/click";
 
 export function Login() {
   const {
@@ -34,6 +35,20 @@ export function Login() {
         });
       });
   }
+
+  const [tipoInput, setTipoInput] = useState("password");
+  const [tipoIcone, setTipoIcone] = useState("bi bi-eye-fill");
+  function mudarTipo() {
+    if (tipoInput === "password") {
+      setTipoIcone("bi bi-eye-slash-fill")
+      setTipoInput("text")
+    } else {
+      setTipoIcone("bi bi-eye-fill")
+      setTipoInput("password")
+    }
+  }
+
+
 
   function onLoginGoogle() {
     loginGoogle()
@@ -86,10 +101,13 @@ export function Login() {
             {errors.email?.message}
           </Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="senha">
-          <Form.Label>Senha</Form.Label>
+        <Form.Label>Senha</Form.Label>
+        <InputGroup className="mb-3" controlId="senha">
+          <InputGroup.Text onClick={mudarTipo}><i className={tipoIcone}></i></InputGroup.Text>
           <Form.Control
-            type="password"
+            onCh
+            id="senha"
+            type={tipoInput}
             placeholder="Sua senha"
             className={errors.senha ? "is-invalid" : ""}
             {...register("senha", { required: "Senha é obrigatória" })}
@@ -97,7 +115,7 @@ export function Login() {
           <Form.Text className="invalid-feedback">
             {errors.senha?.message}
           </Form.Text>
-        </Form.Group>
+        </InputGroup>
         <Button type="submit" variant="success">
           Entrar
         </Button>
