@@ -40,6 +40,7 @@ export function Menu() {
             
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap
+                // Lembrar de estilizar
                 <Nav.Link className="
                 text-white-50 bg-dark
                 border border-3
