@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "./config";
 import { usersCollection } from "./collections";
@@ -37,6 +38,14 @@ export async function loginGoogle() {
 
   return resultado.user;
 }
+
+export async function loginFacebook(){
+  const provider = new FacebookAuthProvider();
+  const resultado = await signInWithPopup(auth, provider)
+  espelhamentoUsuarios(resultado);
+  return resultado.user
+}
+
 
 export async function loginEmailSenha(email, senha) {
   const resultado = await signInWithEmailAndPassword(auth, email, senha);
