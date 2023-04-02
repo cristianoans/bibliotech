@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   signOut,
   FacebookAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { auth } from "./config";
 import { usersCollection } from "./collections";
@@ -41,6 +42,13 @@ export async function loginGoogle() {
 
 export async function loginFacebook(){
   const provider = new FacebookAuthProvider();
+  const resultado = await signInWithPopup(auth, provider)
+  espelhamentoUsuarios(resultado);
+  return resultado.user
+}
+
+export async function loginGitHub(){
+  const provider = new GithubAuthProvider();
   const resultado = await signInWithPopup(auth, provider)
   espelhamentoUsuarios(resultado);
   return resultado.user
