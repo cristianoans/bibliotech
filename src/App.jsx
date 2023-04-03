@@ -15,31 +15,34 @@ import { AdicionarEmprestimo } from "./pages/AdicionarEmprestimo/AdicionarEmpres
 import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
 import { Splash } from "./components/Splash/Splash";
+import { ThemeColorProvider } from "./contexts/ThemeColorContext";
 import { PoliticaPrivacidade } from "./pages/PoliticaPrivacidade/PoliticaPrivacidade";
 import { NotFound } from "./components/NotFound/NotFound";
+
 
 
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [splash, setSplash] = useState(true);
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUsuarioLogado(user);
 
       setTimeout(() => {
-        setSplash(false)
+        setSplash(false);
       }, 1000);
     });
   }, []);
 
-
   return (
     <div>
-      {splash ? <Splash/> :
+      {splash ? (
+        <Splash />
+      ) : (
         <>
           <AuthContext.Provider value={usuarioLogado}>
+            <ThemeColorProvider>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Root />}>
@@ -56,12 +59,12 @@ export function App() {
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-             
             </BrowserRouter>
+            </ThemeColorProvider>
           </AuthContext.Provider>
           <Toaster />
         </>
-      }
+      )}
     </div>
   );
 }

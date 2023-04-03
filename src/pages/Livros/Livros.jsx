@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
 import { deleteLivro, getLivros } from "../../firebase/livros";
 import "./Livros.css";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export function Livros() {
+
+  const { temaEscuro } = ThemeColorContext();
   const [livros, setLivros] = useState(null);
   const [show, setShow] = useState(false);
   const [livro, setLivro] = useState(null);
+
 
   useEffect(() => {
     initializeTable();
@@ -46,11 +50,13 @@ export function Livros() {
   }
 
   return (
-    <div className="livros">
+    <div className={temaEscuro === "dark" ? "bg-secondary text-white" : ""}>
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Livros</h1>
-          <Button as={Link} to="/livros/adicionar" variant="success">
+          <Button as={Link} to="/livros/adicionar" 
+          className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
+          variant="bg-dark" >
             Adicionar Livro
           </Button>
         </div>
@@ -58,7 +64,7 @@ export function Livros() {
         {livros === null ? (
           <Loader />
         ) : (
-          <Table striped bordered hover>
+          <Table striped bordered hover className={temaEscuro === "dark" ? "table table-dark table-striped" : ""}>
             <thead>
               <tr>
                 <th>Título</th>
@@ -72,16 +78,23 @@ export function Livros() {
             <tbody>
               {livros.map((livro) => {
                 return (
-                  <tr key={livro.id}>
+
+                  <tr
+                    key={livro.id}
+                    className={
+                      temaEscuro === "dark"
+                        ? "themeDark-livros"
+                        : "themeLight-livros"
+                    }
+                  >
+
                     <td>{livro.titulo}</td>
                     <td>{livro.autor}</td>
                     <td>{livro.categoria}</td>
                     <td>{livro.isbn}</td>
-
                     <td onClick={() => handleShow(livro)}>
                       <img src={livro.urlCapa} alt={livro.titulo} />
                     </td>
-
                     <td>
                       <Button
                         as={Link}

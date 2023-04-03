@@ -1,19 +1,11 @@
-td {
-    vertical-align: middle;
-}
+.emprestimosContainer{
+    height: 100vh;
 
-td img {
-    height: 200px;
 }
 
 
-.themeDark-livros {
-   
-    color: #ffffff ;
-}
 
-
-.themeDark-livros:nth-of-type(odd)>* {
+.themeDark-emprestimos:nth-of-type(odd)>* {
    
     color: #ffffff !important;
 }
