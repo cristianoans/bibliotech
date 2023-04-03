@@ -15,6 +15,7 @@ import { AdicionarEmprestimo } from "./pages/AdicionarEmprestimo/AdicionarEmpres
 import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
 import { Splash } from "./components/Splash/Splash";
+import {Ajuda} from "./pages/Ajuda/Ajuda";
 import { ThemeColorProvider } from "./contexts/ThemeColorContext";
 import { PoliticaPrivacidade } from "./pages/PoliticaPrivacidade/PoliticaPrivacidade";
 import { NotFound } from "./components/NotFound/NotFound";
@@ -53,6 +54,7 @@ export function App() {
                   <Route path="/emprestimos" element={<Emprestimos />} />
                   <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
                   <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
+                  <Route path="/ajuda" element={<Ajuda/>}/>
                   <Route path="/politica-privacidade" element={<PoliticaPrivacidade />}/>
                 </Route>
                 <Route path="/login" element={<Login />} />

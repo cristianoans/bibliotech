@@ -61,7 +61,15 @@ export function Menu() {
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
               </Nav.Link>
-
+              <Nav.Link as={Link} to="/ajuda">
+                Ajuda
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  onLogout();
+                  setShow(false);
+                }}
+              >
               <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
                <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
@@ -69,6 +77,7 @@ export function Menu() {
               Política de Privacidade
             </Nav.Link>
               <Nav.Link onClick={() => {onLogout(); setShow(false);}} >
+
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
             </Nav>
@@ -87,6 +96,9 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
+              </Nav.Link>
+              <Nav.Link as={Link} to="/ajuda">
+                Ajuda
               </Nav.Link>
               <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
                 <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i>
