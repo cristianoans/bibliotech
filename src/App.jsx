@@ -15,7 +15,7 @@ import { AdicionarEmprestimo } from "./pages/AdicionarEmprestimo/AdicionarEmpres
 import { Emprestimos } from "./pages/Emprestimos/Emprestimos";
 import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
 import { Splash } from "./components/Splash/Splash";
-
+import {Ajuda} from "./pages/Ajuda/Ajuda";
 
 
 export function App() {
@@ -51,6 +51,7 @@ export function App() {
                   <Route path="/emprestimos" element={<Emprestimos />} />
                   <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
                   <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
+                  <Route path="/ajuda" element={<Ajuda/>}/>
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />

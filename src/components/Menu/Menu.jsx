@@ -48,6 +48,9 @@ export function Menu() {
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
               </Nav.Link>
+              <Nav.Link as={Link} to="/ajuda">
+                Ajuda
+              </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   onLogout();
@@ -72,6 +75,9 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
+              </Nav.Link>
+              <Nav.Link as={Link} to="/ajuda">
+                Ajuda
               </Nav.Link>
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
