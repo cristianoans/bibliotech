@@ -1,0 +1,16 @@
+.social_list i:hover {
+    color: #ffbb33;
+}
+
+.social_listCursor {
+    cursor: pointer;
+}
+
+.copy_right span {
+    color: #ffbb33;
+}
+
+.social_list {
+    height: 14px;
+}
+
