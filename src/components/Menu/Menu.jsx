@@ -4,8 +4,11 @@ import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
 import { useState } from "react";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export function Menu() {
+  //Aqui chama-se o contexto do tema e nele estará o estado que controla qual função está sendo usada e a função que altera o tema
+  const { temaEscuro, alterarTema } = ThemeColorContext();
   //Controle de execução do OffCanvas
   const [show, setShow] = useState(false);
 
@@ -18,7 +21,11 @@ export function Menu() {
   }
 
   return (
-    <Navbar bg="success" variant="light" expand="lg">
+    <Navbar
+      bg={temaEscuro==='dark' ? "dark" : "success"}
+      variant={temaEscuro==='dark' ? "dark" : "light"}
+      expand="lg"
+    >
       <Container fluid>
         <Navbar.Brand>
           <Link to="/">
@@ -29,7 +36,7 @@ export function Menu() {
 
         {/* Aqui é o Offcanvas - Ao diminuir a tela, a navbar renderiza um toogle(botão). Clicando nele, abre o Offcanvas, que é um tipo de modal lateral */}
         <Offcanvas
-          className="offCanvas"
+          className={temaEscuro==='dark' ? "themeDark" : "themeLight"}
           show={show}
           onHide={() => setShow(false)}
           placement="end"
@@ -47,6 +54,10 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
+              </Nav.Link>
+              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
+
+               <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
@@ -72,6 +83,9 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
+              </Nav.Link>
+              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
+                <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i>
               </Nav.Link>
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
