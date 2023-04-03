@@ -125,12 +125,12 @@ export function Login() {
       </Button>
 
       <Button className="mb-3" variant="primary" onClick={onLoginFacebook}>
-      <i class="bi bi-facebook"></i> Entrar com o
+      <i className="bi bi-facebook"></i> Entrar com o
         Facebook
       </Button>
 
       <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
-      <i class="bi bi-github"></i> Entrar com o
+      <i className="bi bi-github"></i> Entrar com o
         GitHub
       </Button>
 

@@ -22,13 +22,13 @@ export function Footer() {
             social_list
             dropdown-item
             ">
-                    <i class="social_listCursor bi bi-facebook me-5">
+                    <i className="social_listCursor bi bi-facebook me-5">
                         -Facebook
                     </i>
-                    <i class="social_listCursor bi bi-instagram me-5">
+                    <i className="social_listCursor bi bi-instagram me-5">
                         -Instagram
                     </i>
-                    <i class="social_listCursor bi bi-linkedin me-5">
+                    <i className="social_listCursor bi bi-linkedin me-5">
                         -Linkedin
                     </i>
                 </ul>
