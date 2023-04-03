@@ -1,4 +1,10 @@
-.offCanvas{
+.themeLight{
     background-color:
-    #6ab98e !important;
+    #2a8754 !important;
+    /* color: rgb(0, 0, 0)!important; */
+}
+.themeDark{
+    background-color:
+    #494847 !important;
+    color: rgb(255, 255, 255)!important;
 }

@@ -6,8 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
-import { loginGoogle, loginEmailSenha } from "../../firebase/auth";
-import { click } from "@testing-library/user-event/dist/click";
+import { loginGoogle, loginEmailSenha, loginFacebook, loginGitHub } from "../../firebase/auth";
 
 export function Login() {
   const {
@@ -67,6 +66,42 @@ export function Login() {
       });
   }
 
+
+  function onLoginFacebook() {
+    loginFacebook()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
+
+  function onLoginGitHub() {
+    loginGitHub()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
   const usuarioLogado = useContext(AuthContext);
 
   // Se tiver dados no objeto, está logado
@@ -88,6 +123,17 @@ export function Login() {
         <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
         Google
       </Button>
+
+      <Button className="mb-3" variant="primary" onClick={onLoginFacebook}>
+      <i class="bi bi-facebook"></i> Entrar com o
+        Facebook
+      </Button>
+
+      <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
+      <i class="bi bi-github"></i> Entrar com o
+        GitHub
+      </Button>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
