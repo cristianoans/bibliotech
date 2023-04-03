@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { cadastrarEmailSenha, loginGoogle } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { firebaseError } from "../../firebase/firebaseError";
 
 export function Cadastro() {
   const {
@@ -27,7 +28,7 @@ export function Cadastro() {
         navigate("/");
       })
       .catch((erro) => {
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });
@@ -46,7 +47,7 @@ export function Cadastro() {
       })
       .catch((erro) => {
         // tratamento de erro
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });

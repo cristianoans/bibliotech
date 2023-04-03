@@ -70,6 +70,7 @@ export function Menu() {
                   setShow(false);
                 }}
               />
+
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
