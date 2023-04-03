@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Button, Container, Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
-import { loginGoogle, loginEmailSenha } from "../../firebase/auth";
+import { loginGoogle, loginEmailSenha, loginFacebook, loginGitHub } from "../../firebase/auth";
 
 export function Login() {
   const {
@@ -35,8 +35,58 @@ export function Login() {
       });
   }
 
+  const [tipoInput, setTipoInput] = useState("password");
+  const [tipoIcone, setTipoIcone] = useState("bi bi-eye-slash-fill");
+  function mudarTipo() {
+    if (tipoInput === "password") {
+      setTipoIcone("bi bi-eye-fill")
+      setTipoInput("text")
+    } else {
+      setTipoIcone("bi bi-eye-slash-fill")
+      setTipoInput("password")
+    }
+  }
+
+
+
   function onLoginGoogle() {
     loginGoogle()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
+
+  function onLoginFacebook() {
+    loginFacebook()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
+
+  function onLoginGitHub() {
+    loginGitHub()
       .then((user) => {
         toast.success(`Bem-vindo(a) ${user.email}`, {
           position: "bottom-right",
@@ -73,6 +123,17 @@ export function Login() {
         <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
         Google
       </Button>
+
+      <Button className="mb-3" variant="primary" onClick={onLoginFacebook}>
+      <i class="bi bi-facebook"></i> Entrar com o
+        Facebook
+      </Button>
+
+      <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
+      <i class="bi bi-github"></i> Entrar com o
+        GitHub
+      </Button>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -86,10 +147,13 @@ export function Login() {
             {errors.email?.message}
           </Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="senha">
-          <Form.Label>Senha</Form.Label>
+        <Form.Label>Senha</Form.Label>
+        <InputGroup className="mb-3" controlId="senha">
+          <InputGroup.Text onClick={mudarTipo}><i className={tipoIcone}></i></InputGroup.Text>
           <Form.Control
-            type="password"
+            onCh
+            id="senha"
+            type={tipoInput}
             placeholder="Sua senha"
             className={errors.senha ? "is-invalid" : ""}
             {...register("senha", { required: "Senha é obrigatória" })}
@@ -97,7 +161,7 @@ export function Login() {
           <Form.Text className="invalid-feedback">
             {errors.senha?.message}
           </Form.Text>
-        </Form.Group>
+        </InputGroup>
         <Button type="submit" variant="success">
           Entrar
         </Button>

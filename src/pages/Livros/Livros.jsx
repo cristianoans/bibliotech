@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Modal } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
@@ -8,8 +8,12 @@ import "./Livros.css";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export function Livros() {
+
   const { temaEscuro } = ThemeColorContext();
   const [livros, setLivros] = useState(null);
+  const [show, setShow] = useState(false);
+  const [livro, setLivro] = useState(null);
+
 
   useEffect(() => {
     initializeTable();
@@ -36,19 +40,23 @@ export function Livros() {
     }
   }
 
+  function handleShow(livro) {
+    setLivro(livro);
+    setShow(true);
+  }
+  function handleClose() {
+    setShow(false);
+    setLivro(null);
+  }
+
   return (
     <div className={temaEscuro === "dark" ? "bg-secondary text-white" : ""}>
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Livros</h1>
-          <Button
-            as={Link}
-            to="/livros/adicionar"
-            className={
-              temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"
-            }
-            variant="bg-dark"
-          >
+          <Button as={Link} to="/livros/adicionar" 
+          className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
+          variant="bg-dark" >
             Adicionar Livro
           </Button>
         </div>
@@ -56,14 +64,7 @@ export function Livros() {
         {livros === null ? (
           <Loader />
         ) : (
-          <Table
-            striped
-            bordered
-            hover
-            className={
-              temaEscuro === "dark" ? "table table-dark table-striped" : ""
-            }
-          >
+          <Table striped bordered hover className={temaEscuro === "dark" ? "table table-dark table-striped" : ""}>
             <thead>
               <tr>
                 <th>Título</th>
@@ -77,6 +78,7 @@ export function Livros() {
             <tbody>
               {livros.map((livro) => {
                 return (
+
                   <tr
                     key={livro.id}
                     className={
@@ -85,11 +87,12 @@ export function Livros() {
                         : "themeLight-livros"
                     }
                   >
+
                     <td>{livro.titulo}</td>
                     <td>{livro.autor}</td>
                     <td>{livro.categoria}</td>
                     <td>{livro.isbn}</td>
-                    <td>
+                    <td onClick={() => handleShow(livro)}>
                       <img src={livro.urlCapa} alt={livro.titulo} />
                     </td>
                     <td>
@@ -117,6 +120,16 @@ export function Livros() {
           </Table>
         )}
       </Container>
+      <>
+        <Modal className="text-center" show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title bsPrefix="modal-title text-center" >{livro?.titulo}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <img src={livro?.urlCapa} />
+          </Modal.Body>
+        </Modal>
+      </>
     </div>
   );
 }

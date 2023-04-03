@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { FacebookAuthProvider, GithubAuthProvider, getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -21,3 +21,8 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 // Configura o Storage e seus recursos de Upload
 export const storage = getStorage(app);
+
+export const authFb = new FacebookAuthProvider();
+
+export const authGit = new GithubAuthProvider();  
+

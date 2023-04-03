@@ -1,10 +1,14 @@
+
 import "./Menu.css";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
-import { useState } from "react";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext"; //nome de usuario perto logout
+
+
 
 export function Menu() {
   //Aqui chama-se o contexto do tema e nele estará o estado que controla qual função está sendo usada e a função que altera o tema
@@ -13,6 +17,8 @@ export function Menu() {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
+
+  const usuarioLogado = useContext(AuthContext); //nome de usuario perto logout
 
   function onLogout() {
     logout().then(() => {
@@ -55,16 +61,14 @@ export function Menu() {
               <Nav.Link as={Link} to="/emprestimos">
                 Emprestimos
               </Nav.Link>
-              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
 
+              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
                <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  onLogout();
-                  setShow(false);
-                }}
-              >
+            <Nav.Link as={Link} to="politica-privacidade">
+              Política de Privacidade
+            </Nav.Link>
+              <Nav.Link onClick={() => {onLogout(); setShow(false);}} >
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
             </Nav>
@@ -87,6 +91,19 @@ export function Menu() {
               <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
                 <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i>
               </Nav.Link>
+              <Nav.Link as={Link} to="politica-privacidade">
+                Política de Privacidade
+              </Nav.Link>
+              {usuarioLogado && ( //nome de usuario perto logout
+                //className com BootStrap
+                // Lembrar de estilizar
+                <Nav.Link className="
+                text-white-50 bg-dark
+                border border-3
+                rounded
+                "
+                >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+              )} 
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
               </Nav.Link>
