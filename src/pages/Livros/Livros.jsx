@@ -13,15 +13,22 @@ export function Livros() {
   const [livros, setLivros] = useState(null);
   const [show, setShow] = useState(false);
   const [livro, setLivro] = useState(null);
+  const [search, setSearch] = useState(""); //busca de livros
 
 
   useEffect(() => {
     initializeTable();
-  }, []);
+  }, [search]); // search começa vazio então mostra todos os livros
 
   function initializeTable() {
     getLivros().then((resultados) => {
-      setLivros(resultados);
+      setLivros(
+        resultados.filter(
+          (livro) => //tratando a busca de livros
+            livro.titulo.toLowerCase().includes(search.toLowerCase()) ||
+            livro.isbn.toLowerCase().includes(search.toLowerCase())
+        )
+      );
     });
   }
 
@@ -60,6 +67,13 @@ export function Livros() {
             Adicionar Livro
           </Button>
         </div>
+        {/* Campo de busca INICIO */}
+        <div className="input-group d-flex justify-content-center mb-3">
+            <span className="input-group-text bi bi-search" id=""></span>
+            <input className="" type="text" placeholder='Digite o título ou ISBN' value={search} onChange={(e) => setSearch(e.target.value)} />
+          </div>
+          {/* Campo de busca FIM */}
+
         <hr />
         {livros === null ? (
           <Loader />
