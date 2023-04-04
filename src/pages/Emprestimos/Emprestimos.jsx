@@ -52,6 +52,7 @@ export function Emprestimos() {
                 <th>Livro</th>
                 <th>Status</th>
                 <th>Data de Empréstimo</th>
+                <th>Data de Devolução</th>
                 <th>Ações</th>
               </tr>
             </thead>
@@ -60,6 +61,14 @@ export function Emprestimos() {
                 const dataEmprestimo = emprestimo.dataEmprestimo
                   .toDate()
                   .toLocaleDateString("pt-br");
+
+                const dataEntrega = emprestimo.dataEntrega
+                  .toDate()
+                  .toLocaleDateString("pt-br");
+                const data1 = emprestimo.dataEntrega.toDate();
+
+                const dataAtual = new Date();
+
                 return (
                   <tr
                     key={emprestimo.id}
@@ -74,17 +83,19 @@ export function Emprestimos() {
                     <td>{emprestimo.telefone}</td>
                     <td>{emprestimo.livro.titulo}</td>
                     <td>
-                      <Badge
-                        bg={
-                          emprestimo.status === "Pendente"
-                            ? "warning"
-                            : "success"
-                        }
-                      >
-                        {emprestimo.status}
-                      </Badge>
+                      {!(data1 > dataAtual) ?
+
+                        <Badge bg={"danger"}>Atrasado</Badge>
+                        :
+                        <Badge bg={emprestimo.status === "Pendente" ? "warning" : "success"}>
+                          {emprestimo.status}
+                        </Badge>
+
+                      }
                     </td>
+                  
                     <td>{dataEmprestimo}</td>
+                    <td>{dataEntrega}</td>
                     <td>
                       <Button
                         as={Link}
