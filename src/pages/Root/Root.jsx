@@ -12,6 +12,8 @@ export function Root() {
     // se está deslogado
     // redireciona para a página de login
     return <Navigate to="/login" />;
+  } else if (usuarioLogado.emailVerified === false){
+    return <Navigate to="/verificacao" />
   }
 
   return (
