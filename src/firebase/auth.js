@@ -9,6 +9,7 @@ import {
   updateEmail,
   updateProfile,
   updatePassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "./config";
 import { usersCollection } from "./collections";
@@ -29,9 +30,14 @@ async function espelhamentoUsuarios(resultado) {
   }
 }
 
+
 export async function cadastrarEmailSenha(email, senha) {
   const resultado = await createUserWithEmailAndPassword(auth, email, senha);
   espelhamentoUsuarios(resultado);
+
+  if(resultado.user.emailVerified === false) {
+    emailVerif(resultado.user)
+  }
   return resultado.user;
 }
 
@@ -60,8 +66,17 @@ export async function loginGitHub(){
 
 export async function loginEmailSenha(email, senha) {
   const resultado = await signInWithEmailAndPassword(auth, email, senha);
+
+  if(resultado.user.emailVerified === false) {
+    emailVerif(resultado.user)
+  }
   return resultado.user;
 }
+
+
+export async function emailVerif(user){
+await sendEmailVerification(user);
+  }
 
 export async function logout() {
   await signOut(auth);

@@ -1,8 +1,11 @@
 .emprestimosContainer{
-    height: 100vh;
+    height: calc(100vh - 106px);
 
 }
 
+.page-link{
+    color: black !important;
+}
 
 
 .themeDark-emprestimos:nth-of-type(odd)>* {

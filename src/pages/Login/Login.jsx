@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
 import { loginGoogle, loginEmailSenha, loginFacebook, loginGitHub } from "../../firebase/auth";
+import { firebaseError } from "../../firebase/firebaseError";
 
 export function Login() {
   const {
@@ -28,12 +29,18 @@ export function Login() {
         navigate("/");
       })
       .catch((erro) => {
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });
       });
   }
+
+  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
+  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
+  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
+  const tooltipEntrar = <Tooltip>Clique para Entrar</Tooltip>;
+  
 
   const [tipoInput, setTipoInput] = useState("password");
   const [tipoIcone, setTipoIcone] = useState("bi bi-eye-slash-fill");
@@ -59,7 +66,7 @@ export function Login() {
         navigate("/");
       })
       .catch((erro) => {
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });
@@ -77,7 +84,7 @@ export function Login() {
         navigate("/");
       })
       .catch((erro) => {
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });
@@ -95,7 +102,7 @@ export function Login() {
         navigate("/");
       })
       .catch((erro) => {
-        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
           position: "bottom-right",
           duration: 2500,
         });
@@ -116,23 +123,30 @@ export function Login() {
       </p>
       <h4>Bem-vindo(a) de volta!</h4>
       <p className="text-muted">
-        Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
+        Não tem conta? <Link to="/cadastro">Cadastre-se</Link> 
       </p>
       <hr />
-      <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-        <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
+
+      <OverlayTrigger overlay={tooltipGoogle}>
+      <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
+        <i class="bi bi-google"></i> Entre com o
         Google
       </Button>
+      </OverlayTrigger>
 
-      <Button className="mb-3" variant="primary" onClick={onLoginFacebook}>
-      <i class="bi bi-facebook"></i> Entrar com o
+      <OverlayTrigger overlay={tooltipFace}>
+      <Button className="mb-3 me-1" variant="primary" onClick={onLoginFacebook}>
+      <i className="bi bi-facebook"></i> Entre com o
         Facebook
       </Button>
+      </OverlayTrigger>
 
+      <OverlayTrigger overlay={tooltipGit}>
       <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
-      <i class="bi bi-github"></i> Entrar com o
+      <i className="bi bi-github"></i> Entre com o
         GitHub
       </Button>
+      </OverlayTrigger>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
@@ -162,9 +176,11 @@ export function Login() {
             {errors.senha?.message}
           </Form.Text>
         </InputGroup>
+        <OverlayTrigger overlay={tooltipEntrar}>
         <Button type="submit" variant="success">
           Entrar
         </Button>
+        </OverlayTrigger>
       </Form>
     </Container>
   );
