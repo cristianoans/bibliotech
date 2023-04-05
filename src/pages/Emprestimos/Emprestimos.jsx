@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Container, Table } from "react-bootstrap";
+import { Badge, Button, Container, Pagination, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   avancarPagina,
@@ -56,7 +56,9 @@ export function Emprestimos() {
           : ""
       }
     >
-      <Container>
+      <Container className="d-flex flex-column justify-content-between emprestimosContainer">
+
+<div>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Emprestimos</h1>
           <Button
@@ -70,7 +72,9 @@ export function Emprestimos() {
             Adicionar emprestimo
           </Button>
         </div>
+
         <hr />
+
         {emprestimos === null ? (
           <Loader />
         ) : (
@@ -154,18 +158,39 @@ export function Emprestimos() {
             </tbody>
           </Table>
         )}
+</div>
 
-        <Button
+
+{/* PAGINAÇÃO */}
+
+        <Pagination className="justify-content-center">
+          <Pagination.First
+            disabled={count <= 1}
+            onClick={() => {
+              voltarPag();
+              setCount(count - 1);
+            }}
+          />
+
+          <Pagination.Item>{count}</Pagination.Item>
+          {/* <Button
           disabled={count <= 1}
           onClick={() => {
             voltarPag();
             setCount(count - 1);
           }}
-        >
-          Voltar
-        </Button>
+        > */}
+          {/*   Voltar
+        </Button> */}
 
-        <Button
+          <Pagination.Last
+            disabled={count >= totalEmprestimos / 3}
+            onClick={() => {
+              avancarPag();
+              setCount(count + 1);
+            }}
+          />
+          {/* <Button
           disabled={count >= totalEmprestimos / 3}
           onClick={() => {
             avancarPag();
@@ -173,18 +198,11 @@ export function Emprestimos() {
           }}
         >
           Avançar
-        </Button>
+        </Button> */}
+        </Pagination>
       </Container>
     </div>
   );
 }
 
-//ler imagem array
-//renderização condicional
-//controlar a renderização
-//inicia como true e fazer uma renderização botão
 
-//variavel true, não renderiza voltar
-//avançar = altera false
-
-//renderiza avançar voltar
