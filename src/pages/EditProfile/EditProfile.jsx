@@ -30,10 +30,7 @@ export function EditProfile() {
     excluirConta(usuarioLogado).then(() => {
       toast.success("Perfil excluído com sucesso!", { duration: 2000, position: "bottom-right" })
     })
-      .catch(() => {
-        // toast.error("Erro ao salvar!", { duration: 2000, position: "bottom-right" })
-        console.log(errors);
-      })
+     
   }
 
 
