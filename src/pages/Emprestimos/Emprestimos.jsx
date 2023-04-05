@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Container, Pagination, Table } from "react-bootstrap";
+import { Badge, Button, Container, Pagination, Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   avancarPagina,
@@ -35,6 +35,10 @@ export function Emprestimos() {
     });
   }
 
+  const tooltipAddEmprestimo = <Tooltip>Clique para fazer um novo emprestimo</Tooltip>;
+  const tooltipEditarEmprestimo = <Tooltip>Clique para editar</Tooltip>;
+
+
   useEffect(() => {
     getEmprestimos().then((busca) => {
       setEmprestimos(busca);
@@ -61,6 +65,7 @@ export function Emprestimos() {
 <div>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Emprestimos</h1>
+          <OverlayTrigger overlay={tooltipAddEmprestimo}>
           <Button
             as={Link}
             to="/emprestimos/adicionar"
@@ -71,6 +76,7 @@ export function Emprestimos() {
           >
             Adicionar emprestimo
           </Button>
+          </OverlayTrigger>
         </div>
 
         <hr />
@@ -143,6 +149,7 @@ export function Emprestimos() {
                     <td>{dataEmprestimo}</td>
                     <td>{dataEntrega}</td>
                     <td>
+                    <OverlayTrigger overlay={tooltipEditarEmprestimo}>
                       <Button
                         as={Link}
                         to={`/emprestimos/editar/${emprestimo.id}`}
@@ -151,6 +158,7 @@ export function Emprestimos() {
                       >
                         <i className="bi bi-pencil-fill"></i>
                       </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                 );

@@ -1,4 +1,5 @@
-import { Button, Container, FloatingLabel, Form } from "react-bootstrap";
+
+import { Button, Container, FloatingLabel, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,8 @@ export function AdicionarLivro() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
+
+    const tooltipAddLivro = <Tooltip>Clique para adicionar o livro à biblioteca </Tooltip>;
 
     function onSubmit(data) {
         const imagem = data.imagem[0];
@@ -132,7 +135,10 @@ export function AdicionarLivro() {
                         </Form.Text>
                     </FloatingLabel>
                     </div>
-                    <Button className="mb-5" type="submit" variant="success">Adicionar</Button>
+                    <OverlayTrigger placement="bottom" overlay={tooltipAddLivro}>
+                    <Button type="submit" variant="success">Adicionar</Button>
+                    </OverlayTrigger>
+
                 </Form>
             </Container>
 
