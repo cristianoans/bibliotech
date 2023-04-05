@@ -67,18 +67,14 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  onLogout();
-                  setShow(false);
-                }}
-              />
-
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
               </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
               <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
                 <i className="bi bi-box-arrow-right"></i> Logout
@@ -90,7 +86,7 @@ export function Menu() {
         {/*Aqui eu fiz renderização condicional que, ao abrir o OffCanvas, o menu colapse não abre junto. Se eu voltar a um tamanho maior de tela, a Navbar mantém os componentes que estavam no Menu, só que sem um toggle(botão)  */}
         {!show && (
           <Navbar.Collapse>
-            <Nav className="ms-auto">
+           <Nav className="flex-column">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
@@ -103,27 +99,18 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i>
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
               </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
               </Nav.Link>
-              {usuarioLogado && ( //nome de usuario perto logout
-                //className com BootStrap
-                // Lembrar de estilizar
-                <Nav.Link className="
-                text-white-50 bg-dark
-                border border-3
-                rounded
-                "
-                >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
-              )}
-              <OverlayTrigger placement="bottom" overlay={sair}>
-              <Nav.Link onClick={onLogout}>
-                <i className="bi bi-box-arrow-right"></i>
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
-              </OverlayTrigger>
+              <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
+                <i className="bi bi-box-arrow-right"></i> Logout
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         )}

@@ -3,19 +3,19 @@ import Tabs from 'react-bootstrap/Tabs';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
 import { Container } from 'react-bootstrap';
-
+import "./PoliticaPrivacidade.css";
 
 export function PoliticaPrivacidade() {
     return (
         <div>
             <Container>
-                <h1 style={{ marginTop: "20px", marginBottom: "20px" }} >Política de Privacidade Bibliotech</h1>
+                <h1 class="pageTitle">Política de Privacidade Bibliotech</h1>
 
             </Container>
 
             <Container>
                 <Tabs className="mb-3">
-                    <Tab eventKey="seguranca" title="Coleta de Dados">
+                    <Tab eventKey="seguranca" title="Coleta de Dados" >
                         <Accordion defaultActiveKey="0">
                             <Accordion.Item eventKey="0">
                                 <Accordion.Header> Dados do Usuário</Accordion.Header>
