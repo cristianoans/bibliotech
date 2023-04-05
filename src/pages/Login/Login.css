@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.login {
+    -webkit-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    padding: 50px 100px;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+
+}
+
+.containerLogin {
+    background: rgb(42, 135, 84);
+    background: linear-gradient(90deg, rgba(42, 135, 84, 0.577468487394958) 0%, rgba(0, 13, 6, 0.39539565826330536) 0%, rgba(42, 135, 84, 0.804359243697479) 73%);
+    height: 100vh;
+    position: absolute;
+    top: -48px;
+
+    padding-top: 40px;
+
+   
+
+}
+
+.btnSubmit {
+    background-color: #225e3d !important;
+    border: #2a8754 !important;
+    width: fit-content !important;
+    padding: 10px 50px !important;
+    margin-top: 15px !important;
+
+}
+
+.btnSubmit:hover {
+    background-color: #526e5f !important;
+    transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+.btnSocial{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputStyle {
+    -webkit-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+
+}
+
+.inputStyleSenha {
+    -webkit-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+}
+
+.input-group>.form-control,
+.input-group>.form-floating,
+.input-group>.form-select {
+
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+
+}

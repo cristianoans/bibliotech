@@ -7,6 +7,7 @@ import { cadastrarEmailSenha, loginGoogle } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { firebaseError } from "../../firebase/firebaseError";
+import "./Cadastro.css";
 
 export function Cadastro() {
   const {
@@ -55,48 +56,57 @@ export function Cadastro() {
   }
 
   return (
-    <Container fluid className="my-5">
-      <p className="text-center">
-        <img src={logoIcon} width="256" alt="Logo do app" />
-      </p>
-      <h4>Faça parte da nossa plataforma</h4>
-      <p className="text-muted">
-        Já tem conta? <Link to="/login">Entre</Link>
-      </p>
-      <hr />
-      <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-        <img src={googleIcon} width="32" alt="Logo do google" />
-        Entrar com o Google
-      </Button>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            className={errors.email && "is-invalid"}
-            placeholder="Seu email"
-            {...register("email", { required: "O email é obrigatório" })}
-          />
-          <Form.Text className="invalid-feedback">
-            {errors.email?.message}
-          </Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
-            type="password"
-            className={errors.senha && "is-invalid"}
-            placeholder="Sua senha"
-            {...register("senha", { required: "A senha é obrigatória" })}
-          />
-          <Form.Text className="invalid-feedback">
-            {errors.senha?.message}
-          </Form.Text>
-        </Form.Group>
-        <Button type="submit" variant="success">
-          Cadastrar
-        </Button>
-      </Form>
+    <Container
+      fluid
+      className="d-flex align-items-center flex-column my-5 cadastroContainer"
+    >
+      <div className="cadastro">
+        <div className="container d-flex flex-column">
+          <p className="text-center">
+            <img src={logoIcon} width="240" alt="Logo do app" />
+          </p>
+          <h4>Faça parte da nossa plataforma</h4>
+          <p className="text-dark">
+            Já tem conta? <Link to="/login">Entre</Link>
+          </p>
+          <hr />
+          <div className="btn-social">
+            <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
+              <img src={googleIcon} width="32" alt="Logo do google" />
+              Entrar com o Google
+            </Button>
+          </div>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                className={errors.email && "is-invalid"}
+                placeholder="Seu email"
+                {...register("email", { required: "O email é obrigatório" })}
+              />
+              <Form.Text className="invalid-feedback">
+                {errors.email?.message}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Senha</Form.Label>
+              <Form.Control
+                type="password"
+                className={errors.senha && "is-invalid"}
+                placeholder="Sua senha"
+                {...register("senha", { required: "A senha é obrigatória" })}
+              />
+              <Form.Text className="invalid-feedback">
+                {errors.senha?.message}
+              </Form.Text>
+            </Form.Group>
+            <Button type="submit" variant="success">
+              Cadastrar
+            </Button>
+          </Form>
+        </div>
+      </div>
     </Container>
   );
 }

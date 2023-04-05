@@ -1,4 +1,3 @@
-
 import "./Menu.css";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
@@ -7,8 +6,6 @@ import { logout } from "../../firebase/auth";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext"; //nome de usuario perto logout
-
-
 
 export function Menu() {
   //Aqui chama-se o contexto do tema e nele estará o estado que controla qual função está sendo usada e a função que altera o tema
@@ -28,8 +25,8 @@ export function Menu() {
 
   return (
     <Navbar
-      bg={temaEscuro === 'dark' ? "dark" : "success"}
-      variant={temaEscuro === 'dark' ? "dark" : "light"}
+      bg={temaEscuro === "dark" ? "dark" : "success"}
+      variant={temaEscuro === "dark" ? "dark" : "light"}
       expand="lg"
     >
       <Container fluid>
@@ -42,7 +39,7 @@ export function Menu() {
 
         {/* Aqui é o Offcanvas - Ao diminuir a tela, a navbar renderiza um toogle(botão). Clicando nele, abre o Offcanvas, que é um tipo de modal lateral */}
         <Offcanvas
-          className={temaEscuro === 'dark' ? "themeDark" : "themeLight"}
+          className={temaEscuro === "dark" ? "themeDark" : "themeLight"}
           show={show}
           onHide={() => setShow(false)}
           placement="end"
@@ -64,20 +61,27 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
+
+              <Nav.Link as={Link} to="politica-privacidade">
+                Política de Privacidade
+              </Nav.Link>
+              <Nav.Link
+                 onClick={() =>
+                  alterarTema(temaEscuro === "dark" ? "light" : "dark")
+                }
+              >
+                <i
+                  className={temaEscuro === "dark" ? "bi bi-moon" : "bi bi-sun"}
+                ></i>
+                 - Alterar tema
+              </Nav.Link>
+
               <Nav.Link
                 onClick={() => {
                   onLogout();
                   setShow(false);
                 }}
-              />
-
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
-              </Nav.Link>
-              <Nav.Link as={Link} to="politica-privacidade">
-                Política de Privacidade
-              </Nav.Link>
-              <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
+              >
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
             </Nav>
@@ -100,21 +104,27 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i>
-              </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
               </Nav.Link>
+              <Nav.Link
+                onClick={() =>
+                  alterarTema(temaEscuro === "dark" ? "light" : "dark")
+                }
+              >
+                <i
+                  className={temaEscuro === "dark" ? "bi bi-moon" : "bi bi-sun"}
+                ></i>
+              </Nav.Link>
+
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap
                 // Lembrar de estilizar
-                <Nav.Link className="
-                text-white-50 bg-dark
-                border border-3
-                rounded
-                "
-                >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+                <Nav.Link
+                  className={temaEscuro === "dark" ? "bg-dark text-white" : ""}
+                >
+                  {usuarioLogado.email.split("@")[0]}
+                </Nav.Link> ///nome de usuario perto logout
               )}
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>

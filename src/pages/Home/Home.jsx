@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { getLivros } from "../../firebase/livros";
 import { getEmprestimos } from "../../firebase/emprestimos";
 import { getUsers } from "../../firebase/users";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import "./Home.css"
+
 
 export function Home() {
   const [totalLivros, setTotalLivros] = useState(0);
@@ -9,6 +12,7 @@ export function Home() {
   const [emprestimosPendentes, setEmprestimosPendentes] = useState(0);
   const [emprestimosDevolvidos, setEmprestimosDevolvidos] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
+  const { temaEscuro } = ThemeColorContext();
 
   useEffect(() => {
     getLivros().then((result) => {
@@ -30,7 +34,8 @@ export function Home() {
   
 
   return (
-    <div>
+
+    <div className={temaEscuro === 'dark' ? "principalHomeDark" : "principalHome"}>
       <div className="container mt-4">
         <div className="row">
         <div className="col-md-4">

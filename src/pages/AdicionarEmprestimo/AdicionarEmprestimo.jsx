@@ -4,9 +4,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { adicionarEmprestimo } from "../../firebase/emprestimos";
-import { getLivro, getLivros } from "../../firebase/livros"
+import { getLivro, getLivros } from "../../firebase/livros";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import "./AdicionarEmprestimo.css";
 
 export function AdicionarEmprestimo() {
+
+    const { temaEscuro } = ThemeColorContext();
 
     const [livros, setLivros] = useState([]);
 
@@ -35,7 +39,7 @@ export function AdicionarEmprestimo() {
     }, [])
 
     return (
-        <div className="adicionar-emprestimo">
+        <div className={temaEscuro === 'dark' ? "adicionar-emprestimo" : ""}>
             <Container>
                 <h1>Adicionar empréstimo</h1>
                 <hr />
@@ -77,7 +81,9 @@ export function AdicionarEmprestimo() {
                         </Form.Text>
                     </Form.Group>
                     </Form.Group>
-                    <Button type="submit" variant="success">Emprestar</Button>
+                    <Button className={
+              temaEscuro === "dark" ? "themeDark-btn" : "bg-success"
+            } type="submit" variant="success">Emprestar</Button>
                 </Form>
             </Container>
         </div>

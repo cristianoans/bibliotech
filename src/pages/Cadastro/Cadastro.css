@@ -1,0 +1,22 @@
+.cadastro {
+
+    border-radius: 8px;
+    padding: 40px 80px;
+    -webkit-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.7);
+
+    background-color: #f0f8ff;
+}
+
+.cadastroContainer {
+    background: rgb(42, 135, 84);
+    background: linear-gradient(90deg, rgba(42, 135, 84, 0.577468487394958) 0%, rgba(0, 13, 6, 0.39539565826330536) 0%, rgba(42, 135, 84, 0.804359243697479) 73%);
+
+    height: 100vh;
+    position: absolute;
+    top: -48px;
+
+    padding-top: 60px;
+
+}
