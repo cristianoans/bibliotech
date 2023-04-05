@@ -38,7 +38,7 @@ export function AdicionarLivro() {
     }
 
     return (
-        <div className="adicionar-livro">
+        <div className={temaEscuro === 'dark' ? "adicionar-livro" : "mt-3"}>
             <Container>
                 <h1>Adicionar livro</h1>
                 <hr />
