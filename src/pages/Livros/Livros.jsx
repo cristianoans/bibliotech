@@ -6,6 +6,7 @@ import { Loader } from "../../components/Loader/Loader";
 import { deleteLivro, getLivros } from "../../firebase/livros";
 import "./Livros.css";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import { DetalhesLivroModal } from "../../components/DetalhesLivroModal/DetalhesLivroModal";
 
 export function Livros() {
 
@@ -15,6 +16,8 @@ export function Livros() {
   const [livro, setLivro] = useState(null);
   const [search, setSearch] = useState(""); //busca de livros
 
+  // Estado para mostrar ou ocultar o modal de detalhes do livro
+  const [showDetalhesLivro, setShowDetalhesLivro] = useState(false);
 
   useEffect(() => {
     initializeTable();
@@ -30,6 +33,17 @@ export function Livros() {
         )
       );
     });
+  }
+
+  // Função que exibe o modal de detalhes do livro
+  function openDetalhesLivro(livro) {
+    setLivro(livro); // Atualiza o estado do Livro com o livro selecionado
+    setShowDetalhesLivro(true); // Ativa o estado para mostrar o modal de detalhes do livro
+  }
+
+  // Função para fechar o modal de detalhes do livro
+  function closeDetalhesLivro() {
+    setShowDetalhesLivro(false); // Desative o estado para ocultar o modal de detalhes do livro
   }
 
   function onDeleteLivro(id, titulo) {
@@ -61,9 +75,9 @@ export function Livros() {
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Livros</h1>
-          <Button as={Link} to="/livros/adicionar" 
-          className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
-          variant="bg-dark" >
+          <Button as={Link} to="/livros/adicionar"
+            className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
+            variant="bg-dark" >
             Adicionar Livro
           </Button>
         </div>
@@ -110,21 +124,14 @@ export function Livros() {
                       <img src={livro.urlCapa} alt={livro.titulo} />
                     </td>
                     <td>
-                      <Button
-                        as={Link}
-                        to={`/livros/editar/${livro.id}`}
-                        variant="warning"
-                        size="sm"
-                        className="me-2"
-                      >
+                      <Button as={Link} to={`/livros/editar/${livro.id}`} bsPrefix="btn btn-sm btn-warning me-1">
                         <i className="bi bi-pencil-fill"></i>
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        onClick={() => onDeleteLivro(livro.id, livro.titulo)}
-                      >
+                      <Button onClick={() => onDeleteLivro(livro.id, livro.titulo)} bsPrefix="btn btn-sm btn-danger me-1">
                         <i className="bi bi-trash3-fill"></i>
+                      </Button>
+                      <Button onClick={() => openDetalhesLivro(livro)} bsPrefix="btn btn-sm btn-success me-1">
+                        <i className="bi bi-info-lg"></i>
                       </Button>
                     </td>
                   </tr>
@@ -144,6 +151,9 @@ export function Livros() {
           </Modal.Body>
         </Modal>
       </>
+      <div>
+        <DetalhesLivroModal livro={livro} show={showDetalhesLivro} handleClose={closeDetalhesLivro} />
+      </div>
     </div>
   );
 }
