@@ -28,8 +28,8 @@ export function Menu() {
 
   return (
     <Navbar
-      bg={temaEscuro==='dark' ? "dark" : "success"}
-      variant={temaEscuro==='dark' ? "dark" : "light"}
+      bg={temaEscuro === 'dark' ? "dark" : "success"}
+      variant={temaEscuro === 'dark' ? "dark" : "light"}
       expand="lg"
     >
       <Container fluid>
@@ -42,7 +42,7 @@ export function Menu() {
 
         {/* Aqui é o Offcanvas - Ao diminuir a tela, a navbar renderiza um toogle(botão). Clicando nele, abre o Offcanvas, que é um tipo de modal lateral */}
         <Offcanvas
-          className={temaEscuro==='dark' ? "themeDark" : "themeLight"}
+          className={temaEscuro === 'dark' ? "themeDark" : "themeLight"}
           show={show}
           onHide={() => setShow(false)}
           placement="end"
@@ -64,19 +64,24 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
+              <Nav.Link as={Link} to="/politica-privacidade">
+                Política de Privacidade
+              </Nav.Link>
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
+              </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   onLogout();
                   setShow(false);
                 }}
               >
-              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
-               <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
-            <Nav.Link as={Link} to="politica-privacidade">
-              Política de Privacidade
-            </Nav.Link>
-              <Nav.Link onClick={() => {onLogout(); setShow(false);}} >
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
+              </Nav.Link>
+
+              <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
 
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
@@ -100,11 +105,14 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link onClick={()=>alterarTema(temaEscuro==='dark'?'light':'dark')}>
-                <i className={temaEscuro==='dark' ? "bi bi-moon" : "bi bi-sun"}></i>
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i>
               </Nav.Link>
-              <Nav.Link as={Link} to="politica-privacidade">
+              <Nav.Link as={Link} to="/politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
               </Nav.Link>
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap
@@ -115,7 +123,7 @@ export function Menu() {
                 rounded
                 "
                 >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
-              )} 
+              )}
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
               </Nav.Link>
