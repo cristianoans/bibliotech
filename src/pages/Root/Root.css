@@ -3,3 +3,9 @@
     display: flex;
     flex-direction: column;
 }
+
+.footerStyle{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

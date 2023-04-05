@@ -86,7 +86,7 @@ export function Menu() {
         {/*Aqui eu fiz renderização condicional que, ao abrir o OffCanvas, o menu colapse não abre junto. Se eu voltar a um tamanho maior de tela, a Navbar mantém os componentes que estavam no Menu, só que sem um toggle(botão)  */}
         {!show && (
           <Navbar.Collapse>
-           <Nav className="flex-column">
+           <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>

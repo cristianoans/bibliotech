@@ -4,9 +4,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { adicionarEmprestimo } from "../../firebase/emprestimos";
-import { getLivro, getLivros } from "../../firebase/livros"
+import { getLivro, getLivros } from "../../firebase/livros";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
+import "./AdicionarEmprestimo.css";
 
 export function AdicionarEmprestimo() {
+
+    const { temaEscuro } = ThemeColorContext();
 
     const [livros, setLivros] = useState([]);
 
@@ -18,10 +22,10 @@ export function AdicionarEmprestimo() {
 
     function onSubmit(data) {
         getLivro(data.idLivro).then(livro => {
-            const dataEntrega= new Date(data.dataEntrega+ "T18:00:00-03:00");
+            const dataEntrega = new Date(data.dataEntrega + "T18:00:00-03:00");
             delete data.dataEntrega;
             delete data.idLivro;
-            let novoEmprestimo = {...data, status: "Pendente", livro, dataEmprestimo: new Date(), dataEntrega};
+            let novoEmprestimo = { ...data, status: "Pendente", livro, dataEmprestimo: new Date(), dataEntrega };
             adicionarEmprestimo(novoEmprestimo).then(() => {
                 toast.success("Empréstimo adicionado com sucesso!", { duration: 2000, position: "bottom-right" })
                 navigate("/emprestimos");
@@ -37,7 +41,7 @@ export function AdicionarEmprestimo() {
     }, [])
 
     return (
-        <div className="adicionar-emprestimo">
+        <div className={temaEscuro === 'dark' ? "adicionar-emprestimo" : ""}>
             <Container>
                 <h1>Adicionar empréstimo</h1>
                 <hr />
@@ -72,15 +76,17 @@ export function AdicionarEmprestimo() {
                             {errors.idLivro?.message}
                         </Form.Text>
                         <Form.Group className="mb-3">
-                        <Form.Label>Data de Devolução:</Form.Label>
-                        <Form.Control type="date" className={errors.leitor && "is-invalid"} {...register("dataEntrega", { required: "A data de devolução é obrigatória!", maxLength: { value: 255, message: "Limite de 255 caracteres!" } })} />
-                        <Form.Text className="invalid-feedback">
-                            {errors.leitor?.message}
-                        </Form.Text>
-                    </Form.Group>
+                            <Form.Label>Data de Devolução:</Form.Label>
+                            <Form.Control type="date" className={errors.leitor && "is-invalid"} {...register("dataEntrega", { required: "A data de devolução é obrigatória!", maxLength: { value: 255, message: "Limite de 255 caracteres!" } })} />
+                            <Form.Text className="invalid-feedback">
+                                {errors.leitor?.message}
+                            </Form.Text>
+                        </Form.Group>
                     </Form.Group>
                     <OverlayTrigger placement="bottom" overlay={tooltipAddEmprestimo}>
-                    <Button type="submit" variant="success">Emprestar</Button>
+                        <Button className={
+                            temaEscuro === "dark" ? "themeDark-btn" : "bg-success"
+                        } type="submit" variant="success">Emprestar</Button>
                     </OverlayTrigger>
                 </Form>
             </Container>

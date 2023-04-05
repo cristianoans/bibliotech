@@ -9,7 +9,6 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import { DetalhesLivroModal } from "../../components/DetalhesLivroModal/DetalhesLivroModal";
 
 export function Livros() {
-
   const { temaEscuro } = ThemeColorContext();
   const [livros, setLivros] = useState(null);
   const [show, setShow] = useState(false);
@@ -33,7 +32,9 @@ export function Livros() {
     getLivros().then((resultados) => {
       setLivros(
         resultados.filter(
-          (livro) => //tratando a busca de livros
+          (
+            livro //tratando a busca de livros
+          ) =>
             livro.titulo.toLowerCase().includes(search.toLowerCase()) ||
             livro.isbn.toLowerCase().includes(search.toLowerCase())
         )
@@ -77,11 +78,16 @@ export function Livros() {
   }
 
   return (
-    <div className={temaEscuro === "dark" ? "bg-secondary text-white" : ""}>
+    <div
+      className={
+        temaEscuro === "dark"
+          ? "bg-secondary text-white livrosContainer"
+          : "livrosContainer"
+      }
+    >
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Livros</h1>
-
           <OverlayTrigger overlay={tooltipAddLivro}>
           <Button as={Link} to="/livros/adicionar" 
           className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
@@ -92,16 +98,29 @@ export function Livros() {
         </div>
         {/* Campo de busca INICIO */}
         <div className="input-group d-flex justify-content-center mb-3">
-            <span className="input-group-text bi bi-search" id=""></span>
-            <input className="" type="text" placeholder='Digite o título ou ISBN' value={search} onChange={(e) => setSearch(e.target.value)} />
-          </div>
-          {/* Campo de busca FIM */}
+          <span className="input-group-text bi bi-search" id=""></span>
+          <input
+            className=""
+            type="text"
+            placeholder="Digite o título ou ISBN"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        {/* Campo de busca FIM */}
 
         <hr />
         {livros === null ? (
           <Loader />
         ) : (
-          <Table striped bordered hover className={temaEscuro === "dark" ? "table table-dark table-striped" : ""}>
+          <Table
+            striped
+            bordered
+            hover
+            className={
+              temaEscuro === "dark" ? "table table-dark table-striped" : ""
+            }
+          >
             <thead>
               <tr>
                 <th>Título</th>
@@ -115,7 +134,6 @@ export function Livros() {
             <tbody>
               {livros.map((livro) => {
                 return (
-
                   <tr
                     key={livro.id}
                     className={
@@ -124,7 +142,6 @@ export function Livros() {
                         : "themeLight-livros"
                     }
                   >
-
                     <td>{livro.titulo}</td>
                     <td>{livro.autor}</td>
                     <td>{livro.categoria}</td>
@@ -170,7 +187,9 @@ export function Livros() {
       <>
         <Modal className="text-center" show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title bsPrefix="modal-title text-center" >{livro?.titulo}</Modal.Title>
+            <Modal.Title bsPrefix="modal-title text-center">
+              {livro?.titulo}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <img src={livro?.urlCapa} />
@@ -178,7 +197,11 @@ export function Livros() {
         </Modal>
       </>
       <div>
-        <DetalhesLivroModal livro={livro} show={showDetalhesLivro} handleClose={closeDetalhesLivro} />
+        <DetalhesLivroModal
+          livro={livro}
+          show={showDetalhesLivro}
+          handleClose={closeDetalhesLivro}
+        />
       </div>
     </div>
   );

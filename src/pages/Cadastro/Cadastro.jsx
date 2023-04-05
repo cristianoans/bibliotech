@@ -7,8 +7,14 @@ import { cadastrarEmailSenha, loginFacebook, loginGitHub, loginGoogle } from "..
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { firebaseError } from "../../firebase/firebaseError";
+import "./Cadastro.css";
 
 export function Cadastro() {
+  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
+  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
+  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
+  const tooltipCadastrar = <Tooltip>Clique para cadastrar!</Tooltip>;
+
   const {
     register,
     handleSubmit,
@@ -34,12 +40,6 @@ export function Cadastro() {
         });
       });
   }
-
-
-  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
-  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
-  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
-  const tooltipCadastrar = <Tooltip>Clique para cadastrar!</Tooltip>;
 
   function onLoginGoogle() {
     // then = quando der certo o processo
@@ -105,26 +105,25 @@ export function Cadastro() {
         Já tem conta? <Link to="/login">Entre</Link>
       </p>
       <hr />
-
       <OverlayTrigger overlay={tooltipGoogle}>
-      <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
-        <i class="bi bi-google"></i> Cadastre com o
-        Google
-      </Button>
+        <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
+          <i class="bi bi-google"></i> Cadastre com o
+          Google
+        </Button>
       </OverlayTrigger>
 
       <OverlayTrigger overlay={tooltipFace}>
-      <Button className="mb-3 me-1 " variant="primary" onClick={onLoginFacebook}>
-      <i className="bi bi-facebook"></i> Cadastre com o
-        Facebook
-      </Button>
+        <Button className="mb-3 me-1 " variant="primary" onClick={onLoginFacebook}>
+          <i className="bi bi-facebook"></i> Cadastre com o
+          Facebook
+        </Button>
       </OverlayTrigger>
 
       <OverlayTrigger overlay={tooltipGit}>
-      <Button className="mb-3 " variant="secondary" onClick={onLoginGitHub}>
-      <i className="bi bi-github"></i> Cadastre com o
-        GitHub
-      </Button>
+        <Button className="mb-3 " variant="secondary" onClick={onLoginGitHub}>
+          <i className="bi bi-github"></i> Cadastre com o
+          GitHub
+        </Button>
       </OverlayTrigger>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -153,9 +152,9 @@ export function Cadastro() {
           </Form.Text>
         </Form.Group>
         <OverlayTrigger overlay={tooltipCadastrar}>
-        <Button type="submit" variant="success">
-          Cadastrar
-        </Button>
+          <Button type="submit" variant="success">
+            Cadastrar
+          </Button>
         </OverlayTrigger>
       </Form>
     </Container>

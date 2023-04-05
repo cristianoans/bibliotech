@@ -6,8 +6,14 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
-import { loginGoogle, loginEmailSenha, loginFacebook, loginGitHub } from "../../firebase/auth";
+import {
+  loginGoogle,
+  loginEmailSenha,
+  loginFacebook,
+  loginGitHub,
+} from "../../firebase/auth";
 import { firebaseError } from "../../firebase/firebaseError";
+import "./Login.css";
 
 export function Login() {
   const {
@@ -46,15 +52,13 @@ export function Login() {
   const [tipoIcone, setTipoIcone] = useState("bi bi-eye-slash-fill");
   function mudarTipo() {
     if (tipoInput === "password") {
-      setTipoIcone("bi bi-eye-fill")
-      setTipoInput("text")
+      setTipoIcone("bi bi-eye-fill");
+      setTipoInput("text");
     } else {
-      setTipoIcone("bi bi-eye-slash-fill")
-      setTipoInput("password")
+      setTipoIcone("bi bi-eye-slash-fill");
+      setTipoInput("password");
     }
   }
-
-
 
   function onLoginGoogle() {
     loginGoogle()
@@ -73,7 +77,6 @@ export function Login() {
       });
   }
 
-
   function onLoginFacebook() {
     loginFacebook()
       .then((user) => {
@@ -90,7 +93,6 @@ export function Login() {
         });
       });
   }
-
 
   function onLoginGitHub() {
     loginGitHub()
@@ -117,71 +119,90 @@ export function Login() {
   }
 
   return (
-    <Container fluid className="my-5">
-      <p className="text-center">
-        <img src={loginImg} width="256" alt="Logo" />
-      </p>
-      <h4>Bem-vindo(a) de volta!</h4>
-      <p className="text-muted">
-        Não tem conta? <Link to="/cadastro">Cadastre-se</Link> 
-      </p>
-      <hr />
+    <Container
+      fluid
+      className="my-5 d-flex align-items-center flex-column containerLogin"
+    >
+      <div className="login">
+        <h2 className="text-center">Bibliotech</h2>
 
-      <OverlayTrigger overlay={tooltipGoogle}>
-      <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
-        <i class="bi bi-google"></i> Entre com o
-        Google
-      </Button>
-      </OverlayTrigger>
+        <p className="text-center logoLogin">
+          <img src={loginImg} width="256" alt="Logo" />
+        </p>
 
-      <OverlayTrigger overlay={tooltipFace}>
-      <Button className="mb-3 me-1" variant="primary" onClick={onLoginFacebook}>
-      <i className="bi bi-facebook"></i> Entre com o
-        Facebook
-      </Button>
-      </OverlayTrigger>
+        <h4>Bem-vindo(a) de volta!</h4>
 
-      <OverlayTrigger overlay={tooltipGit}>
-      <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
-      <i className="bi bi-github"></i> Entre com o
-        GitHub
-      </Button>
-      </OverlayTrigger>
+        <p className="text-dark">
+          Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
+        </p>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Seu email"
-            className={errors.email ? "is-invalid" : ""}
-            {...register("email", { required: "Email é obrigatório" })}
-          />
-          <Form.Text className="invalid-feedback">
-            {errors.email?.message}
-          </Form.Text>
-        </Form.Group>
-        <Form.Label>Senha</Form.Label>
-        <InputGroup className="mb-3" controlId="senha">
-          <InputGroup.Text onClick={mudarTipo}><i className={tipoIcone}></i></InputGroup.Text>
-          <Form.Control
-            onCh
-            id="senha"
-            type={tipoInput}
-            placeholder="Sua senha"
-            className={errors.senha ? "is-invalid" : ""}
-            {...register("senha", { required: "Senha é obrigatória" })}
-          />
-          <Form.Text className="invalid-feedback">
-            {errors.senha?.message}
-          </Form.Text>
-        </InputGroup>
-        <OverlayTrigger overlay={tooltipEntrar}>
-        <Button type="submit" variant="success">
-          Entrar
-        </Button>
-        </OverlayTrigger>
-      </Form>
+        <hr />
+
+        <div className="btnSocial">
+          <OverlayTrigger overlay={tooltipGoogle}>
+            <Button className="mb-3 me-2" variant="danger" onClick={onLoginGoogle}>
+              <i class="bi bi-google me-2"></i> Entre com o
+                Google
+            </Button>
+          </OverlayTrigger>
+
+          <OverlayTrigger overlay={tooltipFace}>
+            <Button className="mb-3 me-2" variant="primary" onClick={onLoginFacebook}>
+              <i className="bi bi-facebook me-2"></i> 
+                Entre com o Facebook
+            </Button>
+          </OverlayTrigger>
+
+          <OverlayTrigger overlay={tooltipGit}>
+            <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
+              <i className="bi bi-github me-2"></i> 
+                Entre com o GitHub
+            </Button>
+          </OverlayTrigger>
+        </div>
+
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+            <Form.Label>
+              <b>Email</b>
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Seu email"
+              className={errors.email ? "is-invalid inputStyle" : "inputStyle"}
+              {...register("email", { required: "Email é obrigatório" })}
+            />
+            <Form.Text className="invalid-feedback">
+              {errors.email?.message}
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Label>
+            <b>Senha</b>
+          </Form.Label>
+
+          <InputGroup className="mb-3 inputStyleSenha">
+            <InputGroup.Text onClick={mudarTipo}>
+              <i className={tipoIcone}></i>
+            </InputGroup.Text>
+            <Form.Control
+              id="senha"
+              type={tipoInput}
+              placeholder="Sua senha"
+              className={errors.senha ? "is-invalid" : ""}
+              {...register("senha", { required: "Senha é obrigatória" })}
+            />
+            <Form.Text className="invalid-feedback">
+              {errors.senha?.message}
+            </Form.Text>
+          </InputGroup>
+          <div className="d-flex justify-content-center">
+            <Button type="submit" className="btnSubmit">
+              Entrar
+            </Button>
+          </div>
+        </Form>
+      </div>
     </Container>
   );
 }

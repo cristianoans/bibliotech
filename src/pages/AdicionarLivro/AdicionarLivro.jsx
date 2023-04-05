@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { addLivro, uploadCapaLivro } from "../../firebase/livros";
-import './AdicionarLivro.css'
+import "./AdicionarLivro.css";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 export function AdicionarLivro() {
-
+    const { temaEscuro } = ThemeColorContext();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
     const tooltipAddLivro = <Tooltip>Clique para adicionar o livro à biblioteca </Tooltip>;
 
     function onSubmit(data) {
@@ -34,6 +34,7 @@ export function AdicionarLivro() {
                 navigate("/livros");
             })
         }
+
     }
 
     return (
@@ -80,7 +81,7 @@ export function AdicionarLivro() {
                                 </Form.Text>
                             </Form.Group>
                         </div>
-                        
+
                     </div>
                     <div className="row">
                         <div className="col-lg-2 col-md-6 col-sm-12 col-xs-12">
@@ -127,21 +128,19 @@ export function AdicionarLivro() {
                         </div>
                     </div>
                     <div className="row">
-                    <FloatingLabel className="mb-3 mx-1" controlId="floatingTextarea2" label="Resumo do livro">
-                        <Form.Control className={errors.isbn && "is-invalid"} as="textarea" style={{ height: '100px' }}
-                            {...register("resumo", { required: "Resumo é obrigatório!", maxLength: { value: 2500, message: "Limite de 2500 caracteres!" } })} />
-                        <Form.Text className="invalid-feedback">
-                            {errors.resumo?.message}
-                        </Form.Text>
-                    </FloatingLabel>
+                        <FloatingLabel className="mb-3 mx-1" controlId="floatingTextarea2" label="Resumo do livro">
+                            <Form.Control className={errors.isbn && "is-invalid"} as="textarea" style={{ height: '100px' }}
+                                {...register("resumo", { required: "Resumo é obrigatório!", maxLength: { value: 2500, message: "Limite de 2500 caracteres!" } })} />
+                            <Form.Text className="invalid-feedback">
+                                {errors.resumo?.message}
+                            </Form.Text>
+                        </FloatingLabel>
                     </div>
                     <OverlayTrigger placement="bottom" overlay={tooltipAddLivro}>
-                    <Button type="submit" variant="success">Adicionar</Button>
+                        <Button type="submit" variant="success">Adicionar</Button>
                     </OverlayTrigger>
-
                 </Form>
             </Container>
-
         </div>
     )
 }
