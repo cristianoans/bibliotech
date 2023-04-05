@@ -76,6 +76,10 @@ export function Menu() {
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
+              {usuarioLogado && ( //nome de usuario perto logout
+                //className com BootStrap
+                <Nav.Link>{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+              )}
               <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
@@ -108,6 +112,10 @@ export function Menu() {
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
+              {usuarioLogado && ( //nome de usuario perto logout
+                //className com BootStrap
+                <Nav.Link>{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+              )}
               <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
