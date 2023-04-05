@@ -96,7 +96,9 @@ export function Cadastro() {
   }
 
   return (
-    <Container fluid className="my-5">
+    
+    <Container fluid className="d-flex align-items-center flex-column cadastroContainer">
+      <div className="cadastro">
       <p className="text-center">
         <img src={logoIcon} width="256" alt="Logo do app" />
       </p>
@@ -157,6 +159,8 @@ export function Cadastro() {
           </Button>
         </OverlayTrigger>
       </Form>
+      </div>
     </Container>
+    
   );
 }
