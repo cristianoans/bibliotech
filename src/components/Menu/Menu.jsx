@@ -1,6 +1,6 @@
 
 import "./Menu.css";
-import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Container, Nav, Navbar, Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
@@ -19,6 +19,9 @@ export function Menu() {
   const navigate = useNavigate();
 
   const usuarioLogado = useContext(AuthContext); //nome de usuario perto logout
+
+  const sair = <Tooltip>Clique para deslogar</Tooltip>;
+
 
   function onLogout() {
     logout().then(() => {
@@ -116,9 +119,11 @@ export function Menu() {
                 "
                 >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
               )}
+              <OverlayTrigger placement="bottom" overlay={sair}>
               <Nav.Link onClick={onLogout}>
                 <i className="bi bi-box-arrow-right"></i>
               </Nav.Link>
+              </OverlayTrigger>
             </Nav>
           </Navbar.Collapse>
         )}

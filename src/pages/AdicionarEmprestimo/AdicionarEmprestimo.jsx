@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,8 @@ export function AdicionarEmprestimo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const navigate = useNavigate();
+
+    const tooltipAddEmprestimo = <Tooltip>Clique para adicionar o emprestimo </Tooltip>;
 
     function onSubmit(data) {
         getLivro(data.idLivro).then(livro => {
@@ -77,7 +79,9 @@ export function AdicionarEmprestimo() {
                         </Form.Text>
                     </Form.Group>
                     </Form.Group>
+                    <OverlayTrigger placement="bottom" overlay={tooltipAddEmprestimo}>
                     <Button type="submit" variant="success">Emprestar</Button>
+                    </OverlayTrigger>
                 </Form>
             </Container>
         </div>

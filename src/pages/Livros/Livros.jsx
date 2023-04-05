@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Table, Modal } from "react-bootstrap";
+import { Button, Container, Table, Modal, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
@@ -13,6 +13,11 @@ export function Livros() {
   const [livros, setLivros] = useState(null);
   const [show, setShow] = useState(false);
   const [livro, setLivro] = useState(null);
+
+
+  const tooltipAddLivro = <Tooltip>Clique para adicionar um livro</Tooltip>;
+  const tooltipEditarLivro = <Tooltip>Clique para Editar</Tooltip>;
+  const tooltipApagarLivro = <Tooltip>Clique para apagar o livro da biblioteca</Tooltip>;
 
 
   useEffect(() => {
@@ -54,11 +59,13 @@ export function Livros() {
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h1>Livros</h1>
+          <OverlayTrigger overlay={tooltipAddLivro}>
           <Button as={Link} to="/livros/adicionar" 
           className={temaEscuro === "dark" ? "bg-dark text-white" : "bg-success"}
           variant="bg-dark" >
             Adicionar Livro
           </Button>
+          </OverlayTrigger>
         </div>
         <hr />
         {livros === null ? (
@@ -96,6 +103,7 @@ export function Livros() {
                       <img src={livro.urlCapa} alt={livro.titulo} />
                     </td>
                     <td>
+                    <OverlayTrigger overlay={tooltipEditarLivro}>
                       <Button
                         as={Link}
                         to={`/livros/editar/${livro.id}`}
@@ -105,6 +113,9 @@ export function Livros() {
                       >
                         <i className="bi bi-pencil-fill"></i>
                       </Button>
+                      </OverlayTrigger>
+
+                      <OverlayTrigger overlay={tooltipApagarLivro}>
                       <Button
                         size="sm"
                         variant="danger"
@@ -112,6 +123,7 @@ export function Livros() {
                       >
                         <i className="bi bi-trash3-fill"></i>
                       </Button>
+                      </OverlayTrigger>
                     </td>
                   </tr>
                 );
