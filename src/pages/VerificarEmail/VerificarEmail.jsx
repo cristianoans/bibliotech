@@ -1,19 +1,31 @@
 import { Button } from "react-bootstrap";
-import { emailVerif } from "../../firebase/auth";
+import { emailVerif, logout } from "../../firebase/auth";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import img from "../../assets/images/login.png"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 
 
 export function VerificarEmail() {
 
     const usuarioLogado = useContext(AuthContext);
+    const navigate = useNavigate();
+    
 
     function verifEmail() {
         emailVerif(usuarioLogado)
             .then(() => {
-                alert("Email de confirmação enviado com sucesso!");
+                toast.success(`Email de confirmação enviado com sucesso!`, {
+                    duration: 4000,
+                    position: "top-center",
+                  });
+                
+                logout()
+                navigate("/cadastro");
             })
+            
             .catch((error) => {
                 console.log("Email não enviado", error);
                 alert("Não foi possível enviar o email de confirmação. Tente novamente mais tarde.");

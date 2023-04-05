@@ -19,7 +19,9 @@ import {Ajuda} from "./pages/Ajuda/Ajuda";
 import { ThemeColorProvider } from "./contexts/ThemeColorContext";
 import { PoliticaPrivacidade } from "./pages/PoliticaPrivacidade/PoliticaPrivacidade";
 import { NotFound } from "./components/NotFound/NotFound";
+import { EditProfile } from "./pages/EditProfile/EditProfile";
 import { VerificarEmail } from "./pages/VerificarEmail/VerificarEmail";
+
 
 
 
@@ -57,9 +59,11 @@ export function App() {
                   <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
                   <Route path="/ajuda" element={<Ajuda/>}/>
                   <Route path="/politica-privacidade" element={<PoliticaPrivacidade />}/>
+                  <Route path="/perfil" element={<EditProfile />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+               
                 <Route path="*" element={<NotFound />} />
                 <Route path="/verificacao" element={<VerificarEmail />} />
               </Routes>

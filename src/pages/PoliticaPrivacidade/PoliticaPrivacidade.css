@@ -1,7 +1,13 @@
+
 .principalPrivacidade {
     background-color:#616464;
     color: white!important;
     height: 89.8vh!important;
     padding-top: 10px!important;
+}
+
+.pageTitle {
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 

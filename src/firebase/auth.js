@@ -6,8 +6,10 @@ import {
   signOut,
   FacebookAuthProvider,
   GithubAuthProvider,
+  updateEmail,
+  updateProfile,
+  updatePassword,
   sendEmailVerification,
-  
 } from "firebase/auth";
 import { auth } from "./config";
 import { usersCollection } from "./collections";
@@ -78,4 +80,22 @@ await sendEmailVerification(user);
 
 export async function logout() {
   await signOut(auth);
+}
+
+export async function updateUser(user, data) {
+  await updateEmail(user, data.email);
+  await updateProfile(user, {displayName: data.displayName});
+  await updatePassword(user, data.senha);
+console.log(data);
+console.log(user);
+}
+
+
+export async function excluirConta(user) {
+  const confirmacao = window.confirm("Tem certeza que deseja excluir sua conta? Esta ação é irreversível.");
+ 
+  if (confirmacao) {
+    await user.delete();
+ ;
+  }
 }

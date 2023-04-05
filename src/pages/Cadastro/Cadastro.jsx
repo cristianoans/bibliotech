@@ -1,15 +1,20 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logoIcon from "../../assets/icons/livros.png";
 import googleIcon from "../../assets/icons/google-white.svg";
 import { useForm } from "react-hook-form";
-import { cadastrarEmailSenha, loginGoogle } from "../../firebase/auth";
+import { cadastrarEmailSenha, loginFacebook, loginGitHub, loginGoogle } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { firebaseError } from "../../firebase/firebaseError";
 import "./Cadastro.css";
 
 export function Cadastro() {
+  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
+  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
+  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
+  const tooltipCadastrar = <Tooltip>Clique para cadastrar!</Tooltip>;
+
   const {
     register,
     handleSubmit,
@@ -55,58 +60,103 @@ export function Cadastro() {
       });
   }
 
+
+  function onLoginFacebook() {
+    loginFacebook()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
+  function onLoginGitHub() {
+    loginGitHub()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.email}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${firebaseError(erro.code)}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
+
   return (
-    <Container
-      fluid
-      className="d-flex align-items-center flex-column my-5 cadastroContainer"
-    >
-      <div className="cadastro">
-        <div className="container d-flex flex-column">
-          <p className="text-center">
-            <img src={logoIcon} width="240" alt="Logo do app" />
-          </p>
-          <h4>Faça parte da nossa plataforma</h4>
-          <p className="text-dark">
-            Já tem conta? <Link to="/login">Entre</Link>
-          </p>
-          <hr />
-          <div className="btn-social">
-            <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-              <img src={googleIcon} width="32" alt="Logo do google" />
-              Entrar com o Google
-            </Button>
-          </div>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                className={errors.email && "is-invalid"}
-                placeholder="Seu email"
-                {...register("email", { required: "O email é obrigatório" })}
-              />
-              <Form.Text className="invalid-feedback">
-                {errors.email?.message}
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Senha</Form.Label>
-              <Form.Control
-                type="password"
-                className={errors.senha && "is-invalid"}
-                placeholder="Sua senha"
-                {...register("senha", { required: "A senha é obrigatória" })}
-              />
-              <Form.Text className="invalid-feedback">
-                {errors.senha?.message}
-              </Form.Text>
-            </Form.Group>
-            <Button type="submit" variant="success">
-              Cadastrar
-            </Button>
-          </Form>
-        </div>
-      </div>
+    <Container fluid className="my-5">
+      <p className="text-center">
+        <img src={logoIcon} width="256" alt="Logo do app" />
+      </p>
+      <h4>Faça parte da nossa plataforma</h4>
+      <p className="text-muted">
+        Já tem conta? <Link to="/login">Entre</Link>
+      </p>
+      <hr />
+      <OverlayTrigger overlay={tooltipGoogle}>
+        <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
+          <i class="bi bi-google"></i> Cadastre com o
+          Google
+        </Button>
+      </OverlayTrigger>
+
+      <OverlayTrigger overlay={tooltipFace}>
+        <Button className="mb-3 me-1 " variant="primary" onClick={onLoginFacebook}>
+          <i className="bi bi-facebook"></i> Cadastre com o
+          Facebook
+        </Button>
+      </OverlayTrigger>
+
+      <OverlayTrigger overlay={tooltipGit}>
+        <Button className="mb-3 " variant="secondary" onClick={onLoginGitHub}>
+          <i className="bi bi-github"></i> Cadastre com o
+          GitHub
+        </Button>
+      </OverlayTrigger>
+
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            className={errors.email && "is-invalid"}
+            placeholder="Seu email"
+            {...register("email", { required: "O email é obrigatório" })}
+          />
+          <Form.Text className="invalid-feedback">
+            {errors.email?.message}
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Senha</Form.Label>
+          <Form.Control
+            type="password"
+            className={errors.senha && "is-invalid"}
+            placeholder="Sua senha"
+            {...register("senha", { required: "A senha é obrigatória" })}
+          />
+          <Form.Text className="invalid-feedback">
+            {errors.senha?.message}
+          </Form.Text>
+        </Form.Group>
+        <OverlayTrigger overlay={tooltipCadastrar}>
+          <Button type="submit" variant="success">
+            Cadastrar
+          </Button>
+        </OverlayTrigger>
+      </Form>
     </Container>
   );
 }

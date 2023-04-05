@@ -1,0 +1,21 @@
+.form-group:not(:first-child) {
+    margin-top: 20px;
+  }
+  
+  div > button:first-child {
+    margin-right: 20px;
+  }
+
+  .form {
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  
+  .form-buttons {
+    margin-top: 20px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+  }

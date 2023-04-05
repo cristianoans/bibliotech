@@ -7,17 +7,19 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import "./PoliticaPrivacidade.css"
 
 
+
 export function PoliticaPrivacidade() {
 
     const { temaEscuro } = ThemeColorContext();
     return (
         <div className={temaEscuro === 'dark' ? "principalPrivacidade" : ""}>
             <Container>
-                <h1 style={{ marginTop: "20px", marginBottom: "20px" }} >Política de Privacidade Bibliotech</h1>
+                <h1 class="pageTitle">Política de Privacidade Bibliotech</h1>
 
             </Container>
 
             <Container>
+
                 <Tabs className="mb-3" bsPrefix='nav nav-tabs'>
                     <Tab eventKey="seguranca" title="Coleta de Dados">
                         <Accordion defaultActiveKey="0">

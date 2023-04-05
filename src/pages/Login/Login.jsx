@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -41,6 +41,12 @@ export function Login() {
         });
       });
   }
+
+  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
+  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
+  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
+  const tooltipEntrar = <Tooltip>Clique para Entrar</Tooltip>;
+  
 
   const [tipoInput, setTipoInput] = useState("password");
   const [tipoIcone, setTipoIcone] = useState("bi bi-eye-slash-fill");
@@ -133,18 +139,26 @@ export function Login() {
         <hr />
 
         <div className="btnSocial">
-          <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-            <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
-            Google
-          </Button>
+          <OverlayTrigger overlay={tooltipGoogle}>
+            <Button className="mb-3 me-2" variant="danger" onClick={onLoginGoogle}>
+              <i class="bi bi-google me-2"></i> Entre com o
+                Google
+            </Button>
+          </OverlayTrigger>
 
-          <Button className="mb-3" variant="primary" onClick={onLoginFacebook}>
-            <i className="bi bi-facebook"></i> Entrar com o Facebook
-          </Button>
+          <OverlayTrigger overlay={tooltipFace}>
+            <Button className="mb-3 me-2" variant="primary" onClick={onLoginFacebook}>
+              <i className="bi bi-facebook me-2"></i> 
+                Entre com o Facebook
+            </Button>
+          </OverlayTrigger>
 
-          <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
-            <i className="bi bi-github"></i> Entrar com o GitHub
-          </Button>
+          <OverlayTrigger overlay={tooltipGit}>
+            <Button className="mb-3" variant="secondary" onClick={onLoginGitHub}>
+              <i className="bi bi-github me-2"></i> 
+                Entre com o GitHub
+            </Button>
+          </OverlayTrigger>
         </div>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
