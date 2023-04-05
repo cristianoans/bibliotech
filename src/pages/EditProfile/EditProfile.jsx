@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { excluirConta, updateUser } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
 import "./EditProfile.css";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 
 export function EditProfile() {
+  const {temaEscuro} = ThemeColorContext();
   const usuarioLogado = useContext(AuthContext);
   const [user, setUser] = useState();
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -35,7 +37,7 @@ export function EditProfile() {
 
 
   return (
-    <div>
+    <div className={temaEscuro === 'dark' ? "principalProfileDark" : "principalProfile"}>
       <Container>
         <h1 style={{ marginTop: "20px", marginBottom: "20px" }} >Perfil</h1>
       </Container>

@@ -150,13 +150,14 @@ export function Livros() {
                       <img src={livro.urlCapa} alt={livro.titulo} />
                     </td>
                     <td>
+                      <div className="d-flex flex-column mb-3">
                     <OverlayTrigger overlay={tooltipEditarLivro}>
                       <Button
                         as={Link}
                         to={`/livros/editar/${livro.id}`}
                         variant="warning"
                         size="sm"
-                        className="me-2"
+                        className="mt-2"
                       >
                         <i className="bi bi-pencil-fill"></i>
                       </Button>
@@ -166,16 +167,22 @@ export function Livros() {
                       <Button
                         size="sm"
                         variant="danger"
+                        className="mt-2"
                         onClick={() => onDeleteLivro(livro.id, livro.titulo)}
                       >
                         <i className="bi bi-trash3-fill"></i>
                       </Button>
                       </OverlayTrigger>
                       <OverlayTrigger overlay={tooltipDetalhesLivro}>
-                      <Button onClick={() => openDetalhesLivro(livro)} bsPrefix="btn btn-sm btn-success me-1">
+                      <Button onClick={() => openDetalhesLivro(livro)} 
+                      size="sm"
+                      variant="success"
+                      className="mt-2"
+                      >
                         <i className="bi bi-info-lg"></i>
                       </Button>
                       </OverlayTrigger>
+                      </div>
                     </td>
                   </tr>
                 );
