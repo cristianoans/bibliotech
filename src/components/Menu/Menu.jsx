@@ -1,6 +1,6 @@
 
 import "./Menu.css";
-import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Container, Nav, Navbar, Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
@@ -19,6 +19,9 @@ export function Menu() {
   const navigate = useNavigate();
 
   const usuarioLogado = useContext(AuthContext); //nome de usuario perto logout
+
+  const sair = <Tooltip>Clique para deslogar</Tooltip>;
+
 
   function onLogout() {
     logout().then(() => {
@@ -64,22 +67,23 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  onLogout();
-                  setShow(false);
-                }}
-              />
-
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
               </Nav.Link>
               <Nav.Link as={Link} to="/politica-privacidade">
                 Política de Privacidade
               </Nav.Link>
+
               <Nav.Link as={Link} to="/quiz">
                 Quiz
               </Nav.Link>
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
+              </Nav.Link>
+              {usuarioLogado && ( //nome de usuario perto logout
+                //className com BootStrap
+                <Nav.Link>{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+              )}
               <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
                 <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
@@ -90,7 +94,7 @@ export function Menu() {
         {/*Aqui eu fiz renderização condicional que, ao abrir o OffCanvas, o menu colapse não abre junto. Se eu voltar a um tamanho maior de tela, a Navbar mantém os componentes que estavam no Menu, só que sem um toggle(botão)  */}
         {!show && (
           <Navbar.Collapse>
-            <Nav className="ms-auto">
+           <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
@@ -103,8 +107,8 @@ export function Menu() {
               <Nav.Link as={Link} to="/ajuda">
                 Ajuda
               </Nav.Link>
-              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
-                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i>
+              <Nav.Link as={Link} to="/perfil">
+                Perfil
               </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
@@ -112,18 +116,15 @@ export function Menu() {
               <Nav.Link as={Link} to="/quiz">
                 Quiz
               </Nav.Link>
+              <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
+                <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
+              </Nav.Link>
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap
-                // Lembrar de estilizar
-                <Nav.Link className="
-                text-white-50 bg-dark
-                border border-3
-                rounded
-                "
-                >{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
+                <Nav.Link>{usuarioLogado.email.split('@')[0]}</Nav.Link> ///nome de usuario perto logout
               )}
-              <Nav.Link onClick={onLogout}>
-                <i className="bi bi-box-arrow-right"></i>
+              <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
+                <i className="bi bi-box-arrow-right"></i> Logout
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

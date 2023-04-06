@@ -1,9 +1,6 @@
 import { useState } from "react";
 import images from "../../assets/images/login.png";
-import { Button, Container } from "react-bootstrap";
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import "./NotFound.css";
 import { useForm } from "react-hook-form";
 import { addReporteErro } from "../../firebase/reporteerros";

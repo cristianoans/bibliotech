@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import { Cadastro } from "./pages/Cadastro/Cadastro";
 import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Login/Login";
@@ -20,7 +20,8 @@ import { ThemeColorProvider } from "./contexts/ThemeColorContext";
 import { PoliticaPrivacidade } from "./pages/PoliticaPrivacidade/PoliticaPrivacidade";
 import { NotFound } from "./components/NotFound/NotFound";
 import { Quiz } from "./pages/Quiz/Quiz";
-
+import { EditProfile } from "./pages/EditProfile/EditProfile";
+import { VerificarEmail } from "./pages/VerificarEmail/VerificarEmail";
 
 
 export function App() {
@@ -30,7 +31,7 @@ export function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUsuarioLogado(user);
-
+     
       setTimeout(() => {
         setSplash(false);
       }, 1000);
@@ -57,14 +58,12 @@ export function App() {
                     <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
                     <Route path="/ajuda" element={<Ajuda />} />
                     <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
-
                   </Route>
                   <Route path="/login" element={<Login />} />
                   <Route path="/cadastro" element={<Cadastro />} />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/quiz" element={<Quiz />} />
                 </Routes>
-
               </BrowserRouter>
             </ThemeColorProvider>
           </AuthContext.Provider>

@@ -1,0 +1,17 @@
+.adicionar-emprestimo{
+    background-color:#616464;
+    height: 89.8vh;
+    padding-top:15px !important;
+    padding-bottom: 10px !important;
+    color: #ffffff!important;
+}
+
+.themeDark-btn {
+    background-color: #212529 !important;
+    border: #212529 !important;
+    color: #ffffff !important;
+}
+.themeDark-btn:hover {
+    background-color: #212529a1 !important;
+    border: #212529a1 !important;
+}
