@@ -56,6 +56,7 @@ export function App() {
                     <Route path="/emprestimos" element={<Emprestimos />} />
                     <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
                     <Route path="/emprestimos/editar/:id" element={<EditarEmprestimo />} />
+                    <Route path="/perfil" element={<EditProfile />} />
                     <Route path="/ajuda" element={<Ajuda />} />
                     <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
                   </Route>
