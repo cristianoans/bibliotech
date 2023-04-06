@@ -199,7 +199,7 @@ export function Livros() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <img className="imagensLivroDestaque" src={livro?.urlCapa} />
+            <img className="imagensLivroDestaque" src={livro?.urlCapa} alt={livro?.titulo} />
           </Modal.Body>
         </Modal>
       </>

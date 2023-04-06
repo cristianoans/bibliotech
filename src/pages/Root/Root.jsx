@@ -1,5 +1,5 @@
 import "./Root.css"
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { Menu } from "../../components/Menu/Menu";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -11,7 +11,6 @@ import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 // As páginas com Navbar fixa: home, livros, empréstimos, etc
 export function Root() {
   const usuarioLogado = useContext(AuthContext);
-  const [usuario, setUsuario] = useState(false);
   const { temaEscuro } = ThemeColorContext();
 
   if (usuarioLogado === null) {

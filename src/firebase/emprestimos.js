@@ -95,3 +95,16 @@ export async function voltarPagina(firstObject) {
   });
   return emprestimos;
 }
+
+export async function getUltimosEmprestimos() {
+  const querySnapshot = await getDocs(
+    query(emprestimosCollection, orderBy("dataEmprestimo", "asc"), limitToLast(5))
+  );
+  const emprestimos = [];
+
+  querySnapshot.forEach((doc) => {
+    emprestimos.push({ ...doc.data(), id: doc.id });
+  });
+
+  return emprestimos;
+}
