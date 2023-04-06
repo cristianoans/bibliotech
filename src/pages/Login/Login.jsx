@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, InputGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
 import {
@@ -22,6 +23,12 @@ export function Login() {
   } = useForm();
 
   const navigate = useNavigate();
+  const tooltipCadastrar = <Tooltip>Clique para entrar!</Tooltip>;
+  const tooltipGoogle = <Tooltip>Login com Google</Tooltip>;
+  const tooltipFace = <Tooltip>Login com Facebook</Tooltip>;
+  const tooltipGit = <Tooltip>Login com GitHub</Tooltip>;
+
+
 
   function onSubmit(data) {
     const { email, senha } = data;
@@ -132,17 +139,23 @@ export function Login() {
         <hr />
 
         <div className="btnSocial">
+        <OverlayTrigger overlay={tooltipGoogle}>
           <Button className="mx-3 mt-2" variant="danger" onClick={onLoginGoogle}>
           <i className="bi bi-google"></i> Entrar com o Google    
           </Button>
+          </OverlayTrigger>
 
+          <OverlayTrigger overlay={tooltipFace}>
           <Button className="mx-3 mt-2" variant="primary" onClick={onLoginFacebook}>
             <i className="bi bi-facebook"></i> Entrar com o Facebook
           </Button>
+          </OverlayTrigger>
 
+          <OverlayTrigger overlay={tooltipGit}>
           <Button className="mx-3 mt-2" variant="secondary" onClick={onLoginGitHub}>
             <i className="bi bi-github"></i> Entrar com o GitHub
           </Button>
+          </OverlayTrigger>
         </div>
 
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -181,9 +194,11 @@ export function Login() {
             </Form.Text>
           </InputGroup>
           <div className="d-flex justify-content-center">
+          <OverlayTrigger overlay={tooltipCadastrar}>
             <Button type="submit" className="btnSubmit">
               Entrar
             </Button>
+            </OverlayTrigger>
           </div>
         </Form>
       </div>
