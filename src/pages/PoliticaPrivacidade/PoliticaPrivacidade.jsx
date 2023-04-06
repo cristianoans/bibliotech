@@ -14,7 +14,7 @@ export function PoliticaPrivacidade() {
     return (
         <div className={temaEscuro === 'dark' ? "principalPrivacidade" : ""}>
             <Container>
-                <h1 class="pageTitle">Política de Privacidade Bibliotech</h1>
+                <h1 className="pageTitle">Política de Privacidade Bibliotech</h1>
 
             </Container>
 

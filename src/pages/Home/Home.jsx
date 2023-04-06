@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getLivros } from "../../firebase/livros";
 import { getEmprestimos } from "../../firebase/emprestimos";
 import { getUsers } from "../../firebase/users";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 import "./Home.css"
+import EmprestimosGrafico from "../../components/ChartJS/EmprestimosGrafico";
 
 
 export function Home() {
@@ -13,6 +14,7 @@ export function Home() {
   const [emprestimosDevolvidos, setEmprestimosDevolvidos] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const { temaEscuro } = ThemeColorContext();
+
 
   useEffect(() => {
     getLivros().then((result) => {
@@ -26,51 +28,50 @@ export function Home() {
       setEmprestimosDevolvidos(
         result.filter((emprestimo) => emprestimo.status === "Entregue").length
       );
+      getUsers().then((result) => {
+        setTotalUsers(result.length)
+      });
     });
-    getUsers().then((result) => {
-      setTotalUsers(result.length)
-    });
+
   }, []);
-  
+
+  useEffect(() => {
+    if (totalUsers && emprestimosPendentes && emprestimosDevolvidos) {
+      renderizaGrafico();
+    }
+  }, [totalUsers]);
+
+  function renderizaGrafico() {
+    return (
+      <div>
+        <EmprestimosGrafico emprestimos={{ pendentes: emprestimosPendentes, devolvidos: emprestimosDevolvidos, total: totalEmprestimos }} />
+      </div>
+    )
+  }
+
 
   return (
 
-    <div className={temaEscuro === 'dark' ? "principalHomeDark" : "principalHome"}>
+    <div className={temaEscuro === 'dark' ? "dark bg-secondary" : ""}>
       <div className="container mt-4">
-        <div className="row">
-        <div className="col-md-4">
-            <div className="card" style={{height: '200px'}}>
-              <div className="card-header">
-                <h5 className="card-title">Usuários</h5>
-              </div>
-              <div className="card-body d-flex align-items-center justify-content-center">
-                <span className="fs-1 d-flex">{totalUsers}</span>
-              </div>
+        <div className="row d-flex flex-wrap">
+          <div className="col-md-4 col-sm-12">
+          <div className="card h-100 d-flex justify-content-center align-items-center">
+              <i className="bi bi-people-fill iconText"></i>
+              <span className="fw-bold cardText">{totalUsers} usuários</span>
             </div>
           </div>
-          <div className="col-md-4">
-            <div className="card" style={{height: '200px'}}>
-              <div className="card-header">
-                <h5 className="card-title">Livros</h5>
-              </div>
-              <div className="card-body d-flex align-items-center justify-content-center">
-                <span className="fs-1 d-flex">{totalLivros}</span>
-              </div>
+          <div className="col-md-4 col-sm-12">
+            <div className="card h-100 d-flex justify-content-center align-items-center">
+              <i className="bi bi-book iconText"></i>
+              <span className="fw-bold cardText">{totalLivros} livros</span>
             </div>
           </div>
-          <div className="col-md-4">
-            <div className="card" style={{height: '200px'}}>
-              <div className="card-header">
-                <h5 className="card-title">Empréstimos</h5>
-              </div>
-              <div className="card-body d-flex flex-column justify-content-center fs-4">
-                <span className="d-flex">{`Pendentes: ${emprestimosPendentes}`}</span>
-                <span className="d-flex">{`Devolvidos: ${emprestimosDevolvidos}`}</span>
-                <span className="d-flex">{`Total: ${totalEmprestimos}`}</span>
-              </div>
-            </div>
+          <div className="col-md-4 col-sm-12">
+            {renderizaGrafico()}
           </div>
         </div>
+
       </div>
     </div>
   );

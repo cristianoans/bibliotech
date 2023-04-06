@@ -147,7 +147,7 @@ export function Livros() {
                     <td>{livro.categoria}</td>
                     <td>{livro.isbn}</td>
                     <td onClick={() => handleShow(livro)}>
-                      <img src={livro.urlCapa} alt={livro.titulo} />
+                      <img className="imagensLivro" src={livro.urlCapa} alt={livro.titulo} />
                     </td>
                     <td>
                       <div className="d-flex flex-column mb-3">
@@ -199,7 +199,7 @@ export function Livros() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <img src={livro?.urlCapa} />
+            <img className="imagensLivroDestaque" src={livro?.urlCapa} />
           </Modal.Body>
         </Modal>
       </>
