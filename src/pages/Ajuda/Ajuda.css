@@ -13,13 +13,7 @@ border-radius: 50px;
 .acordeon {
     margin: 10px;
 }
-
-.acordeonItem {
-    background-color: aqua !important;
-    opacity: 0.7;
-    
-    
-}
+   
 h1 {
     text-align: center;
     size: 120px;

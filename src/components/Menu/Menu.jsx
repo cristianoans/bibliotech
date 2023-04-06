@@ -74,8 +74,11 @@ export function Menu() {
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
               </Nav.Link>
-              <Nav.Link as={Link} to="politica-privacidade">
+              <Nav.Link as={Link} to="/politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+              <Nav.Link as={Link} to="/quiz">
+                Quiz
               </Nav.Link>
               <Nav.Link onClick={() => { onLogout(); setShow(false); }} >
                 <i className="bi bi-box-arrow-right"></i> Logout
@@ -105,6 +108,9 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+              <Nav.Link as={Link} to="/quiz">
+                Quiz
               </Nav.Link>
               {usuarioLogado && ( //nome de usuario perto logout
                 //className com BootStrap

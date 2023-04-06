@@ -10,38 +10,24 @@ import { useState } from 'react';
 export function Ajuda() {
 
     const itemsAccordion = [{
-        título: "accordion1", textoAccordion: `Texto de teste.`
+        título: "Como faço para criar uma conta na plataforma?", textoAccordion: `Para criar uma conta em nossa plataforma, 
+        clique no botão "Registrar-se" na página inicial e preencha o formulário de inscrição com suas informações pessoais. 
+        Em seguida, clique em "Registrar-se" para criar sua conta.`
     }, {
-        título: "accordion2", textoAccordion: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor in
-reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.`}, {
-        título: "accordion3", textoAccordion: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor in
-reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.`},
+        título: "Como faço para redefinir minha senha?", textoAccordion: `Para redefinir sua senha, clique em "Esqueci minha senha" 
+        na página de login e siga as instruções na tela para redefinir sua senha.`},
+        
+        { título: "Como posso entrar em contato com o suporte ao cliente?", textoAccordion: `Você pode entrar em contato com o suporte 
+        ao cliente por meio do nosso formulário de contato, que pode ser acessado por meio do link "Contato" na parte inferior da página. 
+        Você também pode enviar um e-mail diretamente para o nosso endereço de suporte.`},
     {
-        título: "accordion4", textoAccordion: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor in
-reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.`},
+        título: "Como faço para cancelar minha assinatura?", textoAccordion: `Para cancelar sua assinatura, acesse a página "Minha conta"
+         e clique no botão "Cancelar assinatura". Em seguida, siga as instruções na tela para concluir o cancelamento.`},
     {
-        título: "accordion5", textoAccordion: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dolor in
-reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.`}]
+        título: "Como faço para atualizar minhas informações de pagamento?", textoAccordion: `Para atualizar suas informações de pagamento,
+         acesse a página "Minha conta" e clique no botão "Informações de pagamento". Em seguida, atualize suas informações de pagamento e 
+         clique em "Salvar" para concluir a atualização. Se você tiver problemas com a atualização, entre em contato com o suporte ao 
+         cliente para obter ajuda adicional.`}]
 
     const [pesquisa, setPesquisa] = useState("")
     function getBusca(event) {
@@ -55,7 +41,7 @@ culpa qui officia deserunt mollit anim id est laborum.`}]
     return (
 
         <div className="container">
-            <h1>Página de Ajuda! </h1>
+            <h1>Ajuda </h1>
             <div className="row d-flex">
                 <div className="input-group d-flex justify-content-center mb-3 mt-3">
                     <span className="input-group-text bi bi-search" id="basic-addon1"></span>
