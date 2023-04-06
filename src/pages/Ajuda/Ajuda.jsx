@@ -80,7 +80,7 @@ export function Ajuda() {
           </div>
         </div>
         <div clasName="row d-flex">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mb-4">
             <Carousel className="carrossel">
               <Carousel.Item>
                 <img
