@@ -70,8 +70,12 @@ export function Menu() {
               <Nav.Link as={Link} to="/perfil">
                 Perfil
               </Nav.Link>
-              <Nav.Link as={Link} to="politica-privacidade">
+              <Nav.Link as={Link} to="/politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+
+              <Nav.Link as={Link} to="/quiz">
+                Quiz
               </Nav.Link>
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
@@ -108,6 +112,9 @@ export function Menu() {
               </Nav.Link>
               <Nav.Link as={Link} to="politica-privacidade">
                 Política de Privacidade
+              </Nav.Link>
+              <Nav.Link as={Link} to="/quiz">
+                Quiz
               </Nav.Link>
               <Nav.Link onClick={() => alterarTema(temaEscuro === 'dark' ? 'light' : 'dark')}>
                 <i className={temaEscuro === 'dark' ? "bi bi-moon" : "bi bi-sun"}></i> - Alterar tema
