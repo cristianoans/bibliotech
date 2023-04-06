@@ -64,6 +64,7 @@ export function App() {
                   <Route path="/cadastro" element={<Cadastro />} />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/quiz" element={<Quiz />} />
+                  <Route path="/verificacao" element={<VerificarEmail />} />
                 </Routes>
               </BrowserRouter>
             </ThemeColorProvider>

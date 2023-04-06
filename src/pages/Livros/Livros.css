@@ -6,8 +6,14 @@ td {
     vertical-align: middle;
 }
 
-td img {
+.imagensLivro {
     height: 200px;
+    width: 150px;
+}
+
+.imagensLivroDestaque {
+    height: 500px;
+    width: 450px;
 }
 
 

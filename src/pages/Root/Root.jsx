@@ -4,13 +4,15 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Menu } from "../../components/Menu/Menu";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Footer } from "../../components/Footer/Footer";
+import { ThemeColorContext } from "../../contexts/ThemeColorContext";
 
 
 // Layout principal do App com Navbar Fixa
 // As páginas com Navbar fixa: home, livros, empréstimos, etc
 export function Root() {
   const usuarioLogado = useContext(AuthContext);
-  const [usuario, setUsuario] = useState(false)
+  const [usuario, setUsuario] = useState(false);
+  const { temaEscuro } = ThemeColorContext();
 
   if (usuarioLogado === null) {
     // se está deslogado
@@ -21,7 +23,8 @@ export function Root() {
   }
 
   return (
-    <div className="wrapper">
+     
+    <div className={temaEscuro === 'dark' ? "wrapper dark bg-secondary" : "wrapper"}>
       <header>
         <Menu />
       </header>

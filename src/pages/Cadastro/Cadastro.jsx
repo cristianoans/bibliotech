@@ -109,7 +109,7 @@ export function Cadastro() {
       <hr />
       <OverlayTrigger overlay={tooltipGoogle}>
         <Button className="mb-3 me-1" variant="danger" onClick={onLoginGoogle}>
-          <i class="bi bi-google"></i> Cadastre com o
+          <i className="bi bi-google"></i> Cadastre com o
           Google
         </Button>
       </OverlayTrigger>
