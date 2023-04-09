@@ -3,7 +3,6 @@ import { Button, Container, Form, InputGroup, OverlayTrigger, Tooltip } from "re
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import googleIcon from "../../assets/icons/google-white.svg";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
 import {

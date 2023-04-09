@@ -1,7 +1,6 @@
 import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logoIcon from "../../assets/icons/livros.png";
-import googleIcon from "../../assets/icons/google-white.svg";
 import { useForm } from "react-hook-form";
 import { cadastrarEmailSenha, loginFacebook, loginGitHub, loginGoogle } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
